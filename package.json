@@ -1,0 +1,22 @@
+{
+  "name": "flatland",
+  "version": "0.0.0",
+  "description": "My talk about doing dimensionality reduction in the browser with React",
+  "main": "index.mdx",
+  "scripts": {
+    "start": "mdx-deck index.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jebeck/flatland.git"
+  },
+  "author": "Jana E. Beck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jebeck/flatland/issues"
+  },
+  "homepage": "https://github.com/jebeck/flatland#readme",
+  "devDependencies": {
+    "mdx-deck": "^2.3.2"
+  }
+}
