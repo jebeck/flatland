@@ -18,5 +18,8 @@
   "homepage": "https://github.com/jebeck/flatland#readme",
   "devDependencies": {
     "mdx-deck": "^2.3.2"
+  },
+  "dependencies": {
+    "shuffle-array": "^1.0.1"
   }
 }
