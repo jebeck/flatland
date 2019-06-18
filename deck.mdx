@@ -1,5 +1,7 @@
 import { Image } from "@mdx-deck/components"
+import { Split } from "@mdx-deck/layouts"
 
+import SingleMNISTDigit from "./components/SingleMNISTDigit"
 import StitchFixLogo from "./components/StitchFixLogo"
 import Team from "./components/Team"
 import TeamOrg from "./components/TeamOrg"
@@ -148,22 +150,130 @@ import TeamOrg from "./components/TeamOrg"
 
 ---
 
-<!-- TODO: table of food emojis with id = emoji column, average weight in g column, average calorie content column -->
+| emoji | weight | calories |
+| ----- | ------ | -------- |
+| 🍈    | 552    | 186      |
+| 🍇    | 2.4    | 2        |
+| 🍉    | 4518   | 1371     |
+| 🍊    | 88     | 47       |
+| 🍋    | 58     | 17       |
 
 ---
+
+TODO: x-y scatter plot
 
 <!-- TODO: x-y scatter plot of foods' weight vs. calorie content -->
 <!-- maybe TODO: calculate and show R-squared correlation? -->
 
 ---
 
-<!-- TODO: expanded table of food emojis with id = emoji, weight, calorie content, carbohydrate content -->
+| emoji | carbs | protein | fat |
+| ----- | ----- | ------- | --- |
+| 🍈    | 8     | 0.8     | 0.2 |
+| 🍇    | 17    | 0.6     | 0.4 |
+| 🍉    | 8     | 0.6     | 0.2 |
+| 🍊    | 13    | 0.8     | 0.3 |
+| 🍋    | 9     | 1.1     | 0.3 |
 
 ---
+
+TODO: x-y-z scatter plot
 
 <!-- TODO: Three.js 3d scatter plot of expanded dataset -->
 
 ---
 
-<!-- TODO: expanded table of food emojis with id = emoji, calorie content, carbohydrate content, protein content, fat content, saturated fat content, sodium content, various vitnamins content -->
-<!-- (prev examples perhaps only fruit & veg, but here drop weight (standardize to 100g) and add lots of cols) -->
+# t-SNE
+
+### and
+
+# UMAP
+
+---
+
+<Image
+  src="https://raw.githubusercontent.com/jebeck/flatland/master/assets/img/MNIST_digits.png">
+
+<div
+  style={{
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    justifyContent: "center",
+    margin: 0,
+    width: "100vw",
+  }}
+>
+  <div
+    style={{
+      backgroundColor: "ghostwhite",
+      padding: "3rem 2rem",
+    }}
+  >
+    <h2 style={{ margin: 0 }}>some MNIST ✍️ digits</h2>
+  </div>
+</div>
+
+</Image>
+
+---
+
+<div
+  style={{
+    backgroundColor: "ghostwhite",
+    padding: "3rem 2rem",
+  }}
+>
+  <h1 style={{ margin: 0 }}>one digit</h1>
+</div>
+
+## 28 x 28 pixels
+
+## = 28 <span>&times;</span> 28 = 784 dimensions
+
+---
+
+<SingleMNISTDigit />
+
+---
+
+<SingleMNISTDigit overlay />
+
+---
+
+<SingleMNISTDigit coordinates overlay />
+
+---
+
+<Split>
+
+<SingleMNISTDigit coordinates highlight={[8, 7]} overlay />
+
+<div style={{ padding: '1rem' }}>
+
+|       | ... | 8,7   | 9,7 | ... |
+| ----- | --- | ----- | --- | --- |
+| img_0 | ... | **0** | 1   | ... |
+| img_1 | ... | ...   | ... | ... |
+
+</div>
+
+</Split>
+
+---
+
+<Split>
+
+<SingleMNISTDigit coordinates highlight={[9, 7]} overlay />
+
+<div style={{ padding: '1rem' }}>
+
+|       | ... | 8,7 | 9,7   | ... |
+| ----- | --- | --- | ----- | --- |
+| img_0 | ... | 0   | **1** | ... |
+| img_1 | ... | ... | ...   | ... |
+
+</div>
+
+</Split>
