@@ -1,10 +1,10 @@
 {
   "name": "flatland",
   "version": "0.0.0",
-  "description": "My talk about doing dimensionality reduction in the browser with React",
+  "description": "Flatland: a romance of React & data science in the browser",
   "main": "index.mdx",
   "scripts": {
-    "start": "mdx-deck index.mdx"
+    "start": "mdx-deck deck.mdx"
   },
   "repository": {
     "type": "git",
