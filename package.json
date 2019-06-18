@@ -1,7 +1,7 @@
 {
   "name": "flatland",
   "version": "0.0.0",
-  "description": "Flatland: a romance of React & data science in the browser",
+  "description": "Flatland: a romance of React & dimensionality reduction in the browser",
   "main": "index.mdx",
   "scripts": {
     "start": "mdx-deck deck.mdx"
