@@ -20,6 +20,7 @@
     "code-surfer": "^0.5.5",
     "d3-array": "^2.2.0",
     "mdx-deck": "^2.3.2",
+    "raw-loader": "^3.0.0",
     "shuffle-array": "^1.0.1",
     "styled-components": "^4.3.1"
   }

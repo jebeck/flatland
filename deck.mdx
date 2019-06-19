@@ -1,13 +1,15 @@
-import { Appear, Image } from "@mdx-deck/components"
-import { Split } from "@mdx-deck/layouts"
+import { Appear, Image } from "@mdx-deck/components";
+import { Split } from "@mdx-deck/layouts";
 
-import { TSNEonMNIST } from "./examples.bundle.js"
-import { UMAPonMNIST } from "./examples.bundle.js"
+import CodeSurfer from "code-surfer";
 
-import SingleMNISTDigit from "./components/SingleMNISTDigit"
-import StitchFixLogo from "./components/StitchFixLogo"
-import Team from "./components/Team"
-import TeamOrg from "./components/TeamOrg"
+import { TSNEonMNIST } from "./examples.bundle.js";
+import { UMAPonMNIST } from "./examples.bundle.js";
+
+import SingleMNISTDigit from "./components/SingleMNISTDigit";
+import StitchFixLogo from "./components/StitchFixLogo";
+import Team from "./components/Team";
+import TeamOrg from "./components/TeamOrg";
 
 # Data science in the browser:
 
@@ -199,13 +201,13 @@ TODO: x-y-z scatter plot
     height: "100vh",
     justifyContent: "center",
     margin: 0,
-    width: "100vw",
+    width: "100vw"
   }}
 >
   <div
     style={{
       backgroundColor: "ghostwhite",
-      padding: "3rem 2rem",
+      padding: "3rem 2rem"
     }}
   >
     <h2 style={{ margin: 0 }}>some MNIST ✍️ digits</h2>
@@ -219,7 +221,7 @@ TODO: x-y-z scatter plot
 <div
   style={{
     backgroundColor: "ghostwhite",
-    padding: "3rem 2rem",
+    padding: "3rem 2rem"
   }}
 >
   <h1 style={{ margin: 0 }}>one digit</h1>
@@ -397,13 +399,79 @@ TODO: x-y-z scatter plot
 
 # Web Worker template
 
-TODO!
+<div style={{ maxHeight: '65vh' }}>
+
+<CodeSurfer code={require("!raw-loader!./assets/code/web-worker.js").default} />
+
+</div>
 
 ---
 
-# simple compute in a Worker
+# Web Worker in React
 
-TODO!
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-worker.js").default}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-worker.js").default}
+  step={{ lines: [1] }}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-worker.js").default}
+  step={{ range: [4, 10] }}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-worker.js").default}
+  step={{ range: [12, 15] }}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-worker.js").default}
+  step={{ range: [16, 19] }}
+/>
+
+</div>
+
+---
+
+# how to bundle a Worker
+
+- Webpack
+  - worker-loader
+  - workerize-loader
+  - 😕 (no create-react-app support, yet)
+    - react-app-rewired = modify CRA Webpack build w/o ejecting
+- rollup
+  - ❓plugin may be out-of-date
 
 ---
 
@@ -435,7 +503,38 @@ TODO!
 
 # caching & invalidation in the React component lifecycle
 
-TODO (or no one cares because hooks; just link to code)
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-caching.js").default}
+  step={{ range: [2, 4] }}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-caching.js").default}
+  step={{ range: [6, 21] }}
+/>
+
+</div>
+
+---
+
+<div style={{ maxHeight: '75vh' }}>
+
+<CodeSurfer
+  code={require("!raw-loader!./assets/code/react-caching.js").default}
+  step={{ range: [23, 32] }}
+/>
+
+</div>
 
 ---
 
