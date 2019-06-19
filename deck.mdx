@@ -1,4 +1,4 @@
-import { Image } from "@mdx-deck/components"
+import { Appear, Image } from "@mdx-deck/components"
 import { Split } from "@mdx-deck/layouts"
 
 import { TSNEonMNIST } from "./examples.bundle.js"
@@ -297,9 +297,145 @@ TODO: x-y-z scatter plot
     <span role="img" aria-label="computer emoji">
       💻
     </span>
-    &nbsp;&nbsp;<span style={{ textDecoration: "underline" }}>compute</span> components!
+    &nbsp;&nbsp;<span style={{ textDecoration: "underline" }}>compute</span>components!
   </h1>
 </div>
+
+---
+
+# UX concerns
+
+<ul>
+  <Appear>
+    <li>minimize load on users' compute resources</li>
+    <li>minimize compute time</li>
+  </Appear>
+</ul>
+
+<Split>
+
+<img src="/assets/img/computer-on-fire.gif" style={{ height: "320px" }} />
+
+<img src="/assets/img/102.gif" style={{ height: "320px" }} />
+
+</Split>
+
+---
+
+# ...how?
+
+<ul>
+  <Appear>
+    <li>
+      compute on the GPU in OffscreenCanvas in a Web Worker{" "}
+      <span role="img" aria-label="sweat smile emoji">
+        😅
+      </span>
+    </li>
+    <li>
+      caching{" "}
+      <small style={{ fontSize: "24px" }}>
+        (yay, one of the two hard problems, along with naming and off-by-one
+        errors)
+      </small>
+    </li>
+  </Appear>
+</ul>
+
+---
+
+# 👷‍♀️ Web Workers 👷
+
+<ul>
+  <Appear>
+    <li>concurrency in JavaScript!</li>
+    <li>separate execution from your app bundle</li>
+    <li>no DOM</li>
+    <li>pass messages back-and-forth</li>
+  </Appear>
+</ul>
+
+---
+
+# 👷‍♀️ Web Workers 👷
+
+<ul>
+  <li>concurrency in JavaScript!</li>
+  <li>separate execution from your app bundle</li>
+  <li>no DOM</li>
+  <li style={{ fontWeight: "bold" }}>
+    pass{" "}
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+      style={{ fontStyle: "italic", textDecoration: "underline" }}
+    >
+      serializable
+    </a>{" "}
+    messages back-and-forth
+  </li>
+</ul>
+
+---
+
+# what's serializable?
+
+- primitive types
+- `Date`s
+- `Blob`s
+- `ArrayBuffer`s
+- etc.
+
+---
+
+# what's **not** serializable?
+
+- DOM nodes
+- `Error`s
+- functions
+
+---
+
+# Web Worker template
+
+TODO!
+
+---
+
+# simple compute in a Worker
+
+TODO!
+
+---
+
+# caching
+
+<ul>
+  <Appear>
+    <li>data doesn't change super often</li>
+    <li>but an escape hatch is a good idea</li>
+  </Appear>
+</ul>
+
+---
+
+# simple caching & invalidation
+
+- object-hash on the data
+- hash serves as `localStorage` key
+- `cache` is a Boolean prop on the `<Compute.../>` components
+
+<Appear>
+
+- 🤫 the secret is you always _store_ results in the cache
+- (you just don't always _pull_ results from the cache)
+
+</Appear>
+
+---
+
+# caching & invalidation in the React component lifecycle
+
+TODO (or no one cares because hooks; just link to code)
 
 ---
 
