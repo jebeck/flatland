@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "d3-array": "^2.2.0",
-    "shuffle-array": "^1.0.1"
+    "shuffle-array": "^1.0.1",
+    "styled-components": "^4.3.1"
   }
 }

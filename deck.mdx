@@ -1,6 +1,9 @@
 import { Image } from "@mdx-deck/components"
 import { Split } from "@mdx-deck/layouts"
 
+import { TSNEonMNIST } from "./examples.bundle.js"
+import { UMAPonMNIST } from "./examples.bundle.js"
+
 import SingleMNISTDigit from "./components/SingleMNISTDigit"
 import StitchFixLogo from "./components/StitchFixLogo"
 import Team from "./components/Team"
@@ -13,12 +16,6 @@ import TeamOrg from "./components/TeamOrg"
 ## @ DinosaurJS
 
 ### June 20th, 2019
-
----
-
-# Flatland
-
-## A romance of data science in the browser
 
 ---
 
@@ -37,7 +34,7 @@ import TeamOrg from "./components/TeamOrg"
 <div style={{display: "flex"}}>
 
 <img
-  src="https://raw.githubusercontent.com/jebeck/flatland/master/assets/img/stitchfix_womens_box.png"
+  src=" /assets/img/stitchfix_womens_box.png"
   style={{ paddingRight: "4rem" }}
 />
 
@@ -74,7 +71,7 @@ import TeamOrg from "./components/TeamOrg"
 ---
 
 <Image
-  src="https://raw.githubusercontent.com/jebeck/flatland/master/assets/img/supreme.png"
+  src="/assets/img/supreme.png"
   style={{
     alignItems: "center",
     backgroundColor: "white",
@@ -192,7 +189,7 @@ TODO: x-y-z scatter plot
 ---
 
 <Image
-  src="https://raw.githubusercontent.com/jebeck/flatland/master/assets/img/MNIST_digits.png">
+  src="/assets/img/MNIST_digits.png">
 
 <div
   style={{
@@ -277,3 +274,41 @@ TODO: x-y-z scatter plot
 </div>
 
 </Split>
+
+---
+
+# the @tensorflow/tfjs-tsne result
+
+<img
+  src="/assets/img/tfjs-tsne-mnist-demo.png"
+  style={{ maxHeight: "65vh", maxWidth: "80vw" }}
+/>
+
+---
+
+<img src="/assets/img/better_living_thru.png" />
+
+---
+
+<img src="/assets/img/better_living_thru.png" />
+
+<div style={{ position: "fixed", bottom: "25rem", right: "27.5rem" }}>
+  <h1 style={{ color: "#5DB968", fontStyle: "italic" }}>
+    <span role="img" aria-label="computer emoji">
+      💻
+    </span>
+    &nbsp;&nbsp;<span style={{ textDecoration: "underline" }}>compute</span> components!
+  </h1>
+</div>
+
+---
+
+# `<ComputeTSNE/>` on MNIST
+
+<TSNEonMNIST cache iterations={1000} />
+
+---
+
+# `<ComputeUMAP/>` on MNIST
+
+<UMAPonMNIST cache />
