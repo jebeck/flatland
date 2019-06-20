@@ -4,6 +4,7 @@
   "description": "Flatland: a romance of React & dimensionality reduction in the browser",
   "main": "index.mdx",
   "scripts": {
+    "build": "mdx-deck build deck.mdx",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
