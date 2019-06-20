@@ -4,7 +4,7 @@ export default {
     "overflow-y": "auto",
   },
   colors: {
-    background: "#483D8B",
+    background: "#261F41",
     text: "#f05d61",
   },
   a: {
