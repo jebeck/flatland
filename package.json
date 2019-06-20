@@ -19,6 +19,8 @@
   "dependencies": {
     "code-surfer": "^0.5.5",
     "d3-array": "^2.2.0",
+    "d3-scale": "^3.0.0",
+    "lodash": "^4.17.11",
     "mdx-deck": "^2.3.2",
     "raw-loader": "^3.0.0",
     "shuffle-array": "^1.0.1",
