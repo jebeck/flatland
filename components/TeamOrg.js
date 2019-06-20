@@ -17,8 +17,8 @@ export default function TeamOrg() {
             width: "25%",
           }}
         >
-          <h1 style={{ margin: "1rem" }}>A</h1>
-          <h2 style={{ margin: "1rem" }}>client</h2>
+          <h1 style={{ color: "#276764", margin: "1rem" }}>A</h1>
+          <h2 style={{ color: "#276764", margin: "1rem" }}>client</h2>
         </div>
         <div
           style={{
@@ -32,8 +32,8 @@ export default function TeamOrg() {
             width: "25%",
           }}
         >
-          <h1 style={{ margin: "1rem" }}>B</h1>
-          <h2 style={{ margin: "1rem" }}>styling</h2>
+          <h1 style={{ color: "#276764", margin: "1rem" }}>B</h1>
+          <h2 style={{ color: "#276764", margin: "1rem" }}>styling</h2>
         </div>
         <div
           style={{
@@ -47,8 +47,8 @@ export default function TeamOrg() {
             width: "25%",
           }}
         >
-          <h1 style={{ margin: "1rem" }}>C</h1>
-          <h2 style={{ margin: "1rem" }}>merch</h2>
+          <h1 style={{ color: "#276764", margin: "1rem" }}>C</h1>
+          <h2 style={{ color: "#276764", margin: "1rem" }}>merch</h2>
         </div>
         <div
           style={{
@@ -62,8 +62,8 @@ export default function TeamOrg() {
             width: "25%",
           }}
         >
-          <h1 style={{ margin: "1rem" }}>D</h1>
-          <h2 style={{ margin: "1rem" }}>etc.</h2>
+          <h1 style={{ color: "#276764", margin: "1rem" }}>D</h1>
+          <h2 style={{ color: "#276764", margin: "1rem" }}>etc.</h2>
         </div>
       </div>
       <div
@@ -78,7 +78,7 @@ export default function TeamOrg() {
           width: "calc(80vw - 2rem)",
         }}
       >
-        <h2>data platform</h2>
+        <h2 style={{ color: "#276764" }}>data platform</h2>
       </div>
     </>
   )

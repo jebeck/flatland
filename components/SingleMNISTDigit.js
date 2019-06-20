@@ -33,7 +33,7 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
             <rect
               fill="none"
               height={VIEW_SIZE}
-              stroke="red"
+              stroke="#f05d61"
               strokeWidth="1.5px"
               width={VIEW_SIZE}
               x={0}
@@ -43,7 +43,7 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
               {range(0, 27).map((d, i) => (
                 <line
                   key={d}
-                  stroke="red"
+                  stroke="#f05d61"
                   strokeWidth=".75px"
                   x1={0}
                   x2={VIEW_SIZE}
@@ -56,7 +56,7 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
               {range(0, 27).map((d, i) => (
                 <line
                   key={d}
-                  stroke="red"
+                  stroke="#f05d61"
                   strokeWidth=".75px"
                   x1={((i + 1) * VIEW_SIZE) / 28}
                   x2={((i + 1) * VIEW_SIZE) / 28}
