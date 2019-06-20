@@ -53,6 +53,7 @@ export default function TwoDimsScatterPlot() {
         <g id="points">
           {dataToRender.map(d => (
             <text
+              key={d["food name"]}
               x={x(d["avg weight per unit"])}
               y={y(d["avg calories per unit"])}
             >
