@@ -4,7 +4,7 @@
   "description": "Flatland: a romance of React & dimensionality reduction in the browser",
   "main": "index.mdx",
   "scripts": {
-    "copy": "mkdir dist/assets && mkdir dist/paintings && cp -r assets/ dist/assets/ && cp -r paintings/ dist/paintings/",
+    "copy": "cp -r assets/ dist/assets/ && cp -r paintings/ dist/paintings/",
     "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },
