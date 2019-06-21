@@ -4,7 +4,8 @@
   "description": "Flatland: a romance of React & dimensionality reduction in the browser",
   "main": "index.mdx",
   "scripts": {
-    "build": "mdx-deck build deck.mdx",
+    "copy": "mkdir dist/assets && mkdir dist/paintings && cp -r assets/ dist/assets/ && cp -r paintings/ dist/paintings/",
+    "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
@@ -26,5 +27,8 @@
     "raw-loader": "^3.0.0",
     "shuffle-array": "^1.0.1",
     "styled-components": "^4.3.1"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.3"
   }
 }
