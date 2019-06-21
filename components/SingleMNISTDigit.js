@@ -24,7 +24,7 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
         width={highlight ? SIZE / 1.75 : SIZE}
       >
         <image
-          xlinkHref="../assets/img/MNIST_eight.png"
+          xlinkHref="/flatland/assets/img/MNIST_eight.png"
           height="100%"
           width="100%"
         />
