@@ -5,7 +5,7 @@
   "main": "index.mdx",
   "scripts": {
     "copy": "cp -r assets/ dist/assets/ && cp -r paintings/ dist/paintings/",
-    "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
+    "build": "rimraf dist/ && mdx-deck build --basepath='/flatland' deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
