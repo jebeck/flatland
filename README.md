@@ -1,7 +1,3 @@
-# Flatland: a romance of React & data science in the browser
+# Flatland: a romance of data science in the browser
 
-To run locally:
-
-1. clone this repo
-1. install the deps: `npm i`
-1. start up: `npm start`
+You can't run this locally if you're not @jebeck, as some (large) assets are not pushed to GitHub.

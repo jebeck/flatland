@@ -1,7 +1,7 @@
 {
   "name": "flatland",
   "version": "0.0.0",
-  "description": "Flatland: a romance of React & dimensionality reduction in the browser",
+  "description": "Flatland: a romance of data science in the browser",
   "main": "index.mdx",
   "scripts": {
     "copy": "cp -r assets/ dist/assets/ && cp -r paintings/ dist/paintings/",
