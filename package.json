@@ -1,0 +1,28 @@
+{
+  "name": "flatland",
+  "version": "0.0.0",
+  "description": "Flatland: a romance of data science in the browser",
+  "private": true,
+  "main": "deck.mdx",
+  "scripts": {
+    "build": "rimraf dist/ && mdx-deck build --basepath='/flatland' deck.mdx && npm run copy",
+    "start": "mdx-deck deck.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jebeck/flatland.git"
+  },
+  "author": "Jana E. Beck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jebeck/flatland/issues"
+  },
+  "homepage": "https://github.com/jebeck/flatland#readme",
+  "devDependencies": {
+    "mdx-deck": "^3.0.13",
+    "rimraf": "^3.0.0"
+  },
+  "dependencies": {
+    "styled-components": "^4.4.1"
+  }
+}
