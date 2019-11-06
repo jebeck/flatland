@@ -23,6 +23,17 @@
     "rimraf": "^3.0.0"
   },
   "dependencies": {
-    "styled-components": "^4.4.1"
+    "d3-array": "^2.3.3",
+    "react-loadable": "^5.5.0",
+    "react-three-fiber": "^3.0.11",
+    "styled-components": "^4.4.1",
+    "three": "^0.110.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5"
   }
 }
