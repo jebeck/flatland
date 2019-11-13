@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
+
+import { color, lab, lch } from "d3-color";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { range } from "d3-array";
 import {
@@ -12,14 +14,49 @@ import {
 
 import { getRandomInt } from "../utils";
 
+const CEIL_CHROMA = 230;
+const CEIL_HSL = 100;
 const CEIL_RGB = 256;
+const CEIL_L = 100;
+
+/** for the cynlindrical spaces (hsl and CIELCH(ab)) */
+const RADIUS = 50;
 
 const baseCameraPosition = {
-  rgb: [CEIL_RGB, CEIL_RGB, CEIL_RGB],
+  hsl: [RADIUS * 1.5, RADIUS * 1.5, RADIUS * 1.5],
+  lab: [RADIUS * 1.5, RADIUS * 1.5, RADIUS * 1.5],
+  rgb: [CEIL_RGB * 0.75, CEIL_RGB * 0.75, CEIL_RGB * 0.75],
 };
 
 const baseFocalPoint = {
-  rgb: [CEIL_RGB, 0, 0],
+  hsl: [0, 0, 0],
+  lab: [0, 0, 0],
+  rgb: [0, 0, 0],
+};
+
+const sphereRadius = {
+  hsl: 2,
+  lab: 1.5,
+  rgb: 4,
+};
+
+/** get position of color with the center of the color space at 0,0,0 instead of a vertex */
+const getPosition = {
+  hsl: ({ h, s, l }) => {
+    return [
+      RADIUS * (s / CEIL_HSL) * Math.cos(h * (Math.PI / 180)),
+      l - CEIL_L / 2,
+      RADIUS * (s / CEIL_HSL) * Math.sin(h * (Math.PI / 180)),
+    ];
+  },
+  lab: ({ l, c, h }) => {
+    return [
+      RADIUS * (c / CEIL_CHROMA) * Math.cos(h * (Math.PI / 180)),
+      l - CEIL_L / 2,
+      RADIUS * (c / CEIL_CHROMA) * Math.sin(h * (Math.PI / 180)),
+    ];
+  },
+  rgb: ({ r, g, b }) => [r, g, b].map(d => d - CEIL_RGB / 2),
 };
 
 const getRandomColors = {
@@ -31,6 +68,16 @@ const getRandomColors = {
 
       return { color: `hsl(${h}, ${s}%, ${l}%)`, h, l, s };
     }),
+  lab: n =>
+    range(n).map(() => {
+      const l = getRandomInt(101);
+      const a = getRandomInt(321) - 160;
+      const b = getRandomInt(321) - 160;
+
+      const { c, h } = lch(lab(l, a, b));
+
+      return { a, b, c, color: `${color(lab(l, a, b)).formatRgb()}`, h, l };
+    }),
   rgb: n =>
     range(n).map(() => {
       const r = getRandomInt(CEIL_RGB);
@@ -41,15 +88,15 @@ const getRandomColors = {
     }),
 };
 
-/** get position of color with the center of the color space at 0,0,0 instead of a vertex */
-const getPosition = {
-  rgb: (...coords) => coords.map(d => d - CEIL_RGB / 2),
-};
-
 function ColorSphere({ color, geometry, position }) {
   return (
     <mesh geometry={geometry} position={position}>
-      <meshLambertMaterial attach="material" color={color} emissive={color} />
+      <meshLambertMaterial
+        attach="material"
+        color={color}
+        // emissive={color}
+        // emissiveIntensity={0.5}
+      />
     </mesh>
   );
 }
@@ -75,10 +122,7 @@ function Spotlight({ type }) {
   return <spotLight position={baseCameraPosition[type]} ref={spotLightRef} />;
 }
 
-export default function ColorSpace({
-  type,
-  n = Math.pow(Math.floor(CEIL_RGB / 20), 3),
-}) {
+export default function ColorSpace({ type, n = 10000 }) {
   const data = useMemo(() => getRandomColors[type](n), [n, type]);
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
@@ -92,13 +136,16 @@ export default function ColorSpace({
     <>
       <CameraControls />
       <Spotlight type={type} />
-      <sphereBufferGeometry args={[4, 25, 25]} ref={geometryRef} />
+      <sphereBufferGeometry
+        args={[sphereRadius[type], 25, 25]}
+        ref={geometryRef}
+      />
       {data.map((d, i) => (
         <ColorSphere
           color={d.color}
           geometry={geometry}
           key={`${i}-${d.color}`}
-          position={getPosition[type](d.r, d.g, d.b)}
+          position={getPosition[type](d)}
         />
       ))}
     </>
