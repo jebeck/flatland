@@ -2,7 +2,13 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { range } from "d3-array";
-import { extend, useRender, useResource, useThree } from "react-three-fiber";
+import {
+  extend,
+  useFrame,
+  useRender,
+  useResource,
+  useThree,
+} from "react-three-fiber";
 
 import { getRandomInt } from "../utils";
 
@@ -13,7 +19,7 @@ const baseCameraPosition = {
 };
 
 const baseFocalPoint = {
-  rgb: [0, 0, 0],
+  rgb: [CEIL_RGB, 0, 0],
 };
 
 const getRandomColors = {
@@ -50,7 +56,7 @@ function ColorSphere({ color, geometry, position }) {
 
 extend({ OrbitControls });
 
-function CameraControls(props) {
+function CameraControls() {
   const { camera } = useThree();
   const controls = useRef();
 
@@ -58,7 +64,15 @@ function CameraControls(props) {
 
   useRender(() => controls.current && controls.current.update());
 
-  return <orbitControls args={[camera, canvasEl]} ref={controls} {...props} />;
+  return <orbitControls args={[camera, canvasEl]} autoRotate ref={controls} />;
+}
+
+function Spotlight({ type }) {
+  const spotLightRef = useRef();
+  const { camera } = useThree();
+  useFrame(() => spotLightRef.current.position.copy(camera.position));
+
+  return <spotLight position={baseCameraPosition[type]} ref={spotLightRef} />;
 }
 
 export default function ColorSpace({
@@ -77,8 +91,8 @@ export default function ColorSpace({
   return (
     <>
       <CameraControls />
-      <sphereBufferGeometry args={[2.5, 25, 25]} ref={geometryRef} />
-      <spotLight position={baseCameraPosition[type]} />
+      <Spotlight type={type} />
+      <sphereBufferGeometry args={[4, 25, 25]} ref={geometryRef} />
       {data.map((d, i) => (
         <ColorSphere
           color={d.color}
