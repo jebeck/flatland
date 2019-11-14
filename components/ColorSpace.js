@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { scaleLinear } from "d3-scale";
 
 import { color, lab, lch } from "d3-color";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -22,23 +23,12 @@ const CEIL_L = 100;
 /** for the cynlindrical spaces (hsl and CIELCH(ab)) */
 const RADIUS = 50;
 
-const baseCameraPosition = {
-  hsl: [RADIUS * 1.5, RADIUS * 1.5, RADIUS * 1.5],
-  lab: [RADIUS * 1.5, RADIUS * 1.5, RADIUS * 1.5],
-  rgb: [CEIL_RGB * 0.75, CEIL_RGB * 0.75, CEIL_RGB * 0.75],
-};
+const rgbRescale = scaleLinear()
+  .domain([0, CEIL_RGB])
+  .range([-42.5, 42.5]);
 
-const baseFocalPoint = {
-  hsl: [0, 0, 0],
-  lab: [0, 0, 0],
-  rgb: [0, 0, 0],
-};
-
-const sphereRadius = {
-  hsl: 2,
-  lab: 1.5,
-  rgb: 4,
-};
+const startingCameraPosition = [75, 75, 75];
+const startingFocalPoint = [0, 0, 0];
 
 /** get position of color with the center of the color space at 0,0,0 instead of a vertex */
 const getPosition = {
@@ -56,7 +46,7 @@ const getPosition = {
       RADIUS * (c / CEIL_CHROMA) * Math.sin(h * (Math.PI / 180)),
     ];
   },
-  rgb: ({ r, g, b }) => [r, g, b].map(d => d - CEIL_RGB / 2),
+  rgb: ({ r, g, b }) => [r, g, b].map(d => rgbRescale(d)),
 };
 
 const getRandomColors = {
@@ -119,27 +109,24 @@ function Spotlight({ type }) {
   const { camera } = useThree();
   useFrame(() => spotLightRef.current.position.copy(camera.position));
 
-  return <spotLight position={baseCameraPosition[type]} ref={spotLightRef} />;
+  return <spotLight position={startingCameraPosition} ref={spotLightRef} />;
 }
 
-export default function ColorSpace({ type, n = 10000 }) {
+export default function ColorSpace({ type, n = 10000, r = 2 }) {
   const data = useMemo(() => getRandomColors[type](n), [n, type]);
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(...baseCameraPosition[type]);
-    camera.lookAt(...baseFocalPoint[type]);
+    camera.position.set(...startingCameraPosition);
+    camera.lookAt(...startingFocalPoint);
   }, [camera, type]);
 
   return (
     <>
       <CameraControls />
       <Spotlight type={type} />
-      <sphereBufferGeometry
-        args={[sphereRadius[type], 25, 25]}
-        ref={geometryRef}
-      />
+      <sphereBufferGeometry args={[r, 25, 25]} ref={geometryRef} />
       {data.map((d, i) => (
         <ColorSphere
           color={d.color}
