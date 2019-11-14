@@ -16,9 +16,10 @@ import {
 import { getRandomInt } from "../utils";
 
 const CEIL_CHROMA = 230;
-const CEIL_HSL = 100;
+const CEIL_HUE = 360;
+/** hsl's saturation and lightness; lab's luminance */
+const CEIL_SL = 100;
 const CEIL_RGB = 256;
-const CEIL_L = 100;
 
 /** for the cynlindrical spaces (hsl and CIELCH(ab)) */
 const RADIUS = 50;
@@ -34,25 +35,25 @@ const startingFocalPoint = [0, 0, 0];
 const getPosition = {
   hsl: ({ h, s, l }) => {
     return [
-      RADIUS * (s / CEIL_HSL) * Math.cos(h * (Math.PI / 180)),
-      l - CEIL_L / 2,
-      RADIUS * (s / CEIL_HSL) * Math.sin(h * (Math.PI / 180)),
+      RADIUS * (s / CEIL_SL) * Math.cos(h * (Math.PI / 180)),
+      l - CEIL_SL / 2,
+      RADIUS * (s / CEIL_SL) * Math.sin(h * (Math.PI / 180)),
     ];
   },
   lab: ({ l, c, h }) => {
     return [
       RADIUS * (c / CEIL_CHROMA) * Math.cos(h * (Math.PI / 180)),
-      l - CEIL_L / 2,
+      l - CEIL_SL / 2,
       RADIUS * (c / CEIL_CHROMA) * Math.sin(h * (Math.PI / 180)),
     ];
   },
   rgb: ({ r, g, b }) => [r, g, b].map(d => rgbRescale(d)),
 };
 
-const getRandomColors = {
+const getRandomlyDistributedColors = {
   hsl: n =>
     range(n).map(() => {
-      const h = getRandomInt(360);
+      const h = getRandomInt(CEIL_HUE);
       const s = getRandomInt(100);
       const l = getRandomInt(100);
 
@@ -76,6 +77,95 @@ const getRandomColors = {
 
       return { b, color: `rgb(${r}, ${g}, ${b})`, g, r };
     }),
+};
+
+const getUniformlyDistributedColors = {
+  hsl: n => {
+    const coords = [];
+
+    const hueScale = scaleLinear()
+      .domain([0, n * 2])
+      .range([0, CEIL_HUE]);
+    const sScale = scaleLinear()
+      .domain([0, n / 2])
+      .range([0, CEIL_SL]);
+    const lScale = scaleLinear()
+      .domain([0, n])
+      .range([0, CEIL_SL]);
+
+    range(0, n * 2 + 1).forEach(x => {
+      range(0, n / 2 + 1).forEach(y => {
+        range(0, n + 1).forEach(z => {
+          const h = hueScale(x);
+          const s = Math.round(sScale(y));
+          const l = Math.round(lScale(z));
+
+          coords.push({ color: `hsl(${h}, ${s}%, ${l}%)`, h, l, s });
+        });
+      });
+    });
+
+    return coords;
+  },
+  lab: n => {
+    const coords = [];
+
+    const lScale = scaleLinear()
+      .domain([0, n])
+      .range([0, CEIL_SL]);
+    const abScale = scaleLinear()
+      .domain([0, n])
+      .range([-160, 160]);
+
+    range(0, n + 1).forEach(x => {
+      range(0, n + 1).forEach(y => {
+        range(0, n + 1).forEach(z => {
+          const l = lScale(x);
+          const a = abScale(y);
+          const b = abScale(z);
+
+          const { c, h } = lch(lab(l, a, b));
+
+          coords.push({
+            a,
+            b,
+            c,
+            color: `${color(lab(l, a, b)).formatRgb()}`,
+            h,
+            l,
+          });
+        });
+      });
+    });
+
+    return coords;
+  },
+  rgb: n => {
+    const coords = [];
+
+    const rgbGridScale = scaleLinear()
+      .domain([0, n])
+      .range([0, 256]);
+
+    range(0, n + 1).forEach(x => {
+      range(0, n + 1).forEach(y => {
+        range(0, n + 1).forEach(z => {
+          /** r, g, b values must be integers */
+          const r = Math.round(rgbGridScale(x));
+          const g = Math.round(rgbGridScale(y));
+          const b = Math.round(rgbGridScale(z));
+          coords.push({
+            b,
+            color: `rgb(${r}, ${g}, ${b})`,
+            g,
+            r,
+          });
+        });
+      });
+    });
+
+    return coords;
+  },
 };
 
 function ColorSphere({ color, geometry, position }) {
@@ -112,8 +202,14 @@ function Spotlight({ type }) {
   return <spotLight position={startingCameraPosition} ref={spotLightRef} />;
 }
 
-export default function ColorSpace({ type, n = 10000, r = 2 }) {
-  const data = useMemo(() => getRandomColors[type](n), [n, type]);
+export default function ColorSpace({ type, n = 10000, r = 2, uniform }) {
+  const data = useMemo(() => {
+    if (uniform) {
+      return getUniformlyDistributedColors[type](n);
+    } else {
+      return getRandomlyDistributedColors[type](n);
+    }
+  }, [n, type, uniform]);
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
 
