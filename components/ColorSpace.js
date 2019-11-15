@@ -13,6 +13,7 @@ import {
 
 import getColorXYZPosition from "../utils/getColorXYZPosition";
 import getColorXYZInAnotherSpace from "../utils/getColorXYZInAnotherSpace";
+import { SPACES } from "../utils/constants";
 
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
@@ -84,7 +85,7 @@ export default function ColorSpace({
   });
 
   useEffect(() => {
-    setTimeout(() => {
+    if (animateToSpace) {
       setPositions(i => {
         const { x, y, z } = getColorXYZInAnotherSpace({
           animateToSpace,
@@ -93,8 +94,8 @@ export default function ColorSpace({
         });
         return { meshPosition: [x, y, z] };
       });
-    }, 1000);
-  });
+    }
+  }, [animateToSpace, data, setPositions, spaceRadius]);
 
   useEffect(() => {
     camera.position.set(...startingCameraPosition);
@@ -102,7 +103,7 @@ export default function ColorSpace({
   }, [camera]);
 
   return (
-    <>
+    <group>
       <CameraControls autoRotate={!animateToSpace} />
       <Spotlight />
       <sphereBufferGeometry args={[sphereRadius, 25, 25]} ref={geometryRef} />
@@ -116,7 +117,7 @@ export default function ColorSpace({
           />
         );
       })}
-    </>
+    </group>
   );
 }
 
@@ -126,11 +127,11 @@ ColorSpace.defaultProps = {
 };
 
 ColorSpace.propTypes = {
-  animateToSpace: PropTypes.oneOf(["hsl", "lab", "rgb"]),
+  animateToSpace: PropTypes.oneOf(SPACES).isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({ color: PropTypes.string.isRequired })
   ).isRequired,
-  space: PropTypes.oneOf(["hsl", "lab", "rgb"]).isRequired,
+  space: PropTypes.oneOf(SPACES).isRequired,
   spaceRadius: PropTypes.number.isRequired,
   sphereRadius: PropTypes.number,
 };

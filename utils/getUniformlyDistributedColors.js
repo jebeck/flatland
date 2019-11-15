@@ -31,7 +31,7 @@ const getUniformlyDistributedColors = {
       });
     });
 
-    return coords;
+    return { data: coords, space: "hsl" };
   },
   lab(n) {
     const coords = [];
@@ -64,7 +64,7 @@ const getUniformlyDistributedColors = {
       });
     });
 
-    return coords;
+    return { data: coords, space: "lab" };
   },
   rgb(n) {
     const coords = [];
@@ -90,7 +90,7 @@ const getUniformlyDistributedColors = {
       });
     });
 
-    return coords;
+    return { data: coords, space: "rgb" };
   },
 };
 

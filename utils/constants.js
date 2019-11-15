@@ -11,3 +11,5 @@ export const CEIL_RGB = 256;
 
 /** hsl's saturation and lightness; lab's luminance */
 export const CEIL_SL = 100;
+
+export const SPACES = ["hsl", "lab", "rgb"];
