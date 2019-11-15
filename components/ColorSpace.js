@@ -1,7 +1,6 @@
-import _ from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import * as color from "d3-color";
+import { animated, useSpring } from "react-spring/three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
@@ -12,34 +11,49 @@ import {
   useThree,
 } from "react-three-fiber";
 
-import { CEIL_SL } from "../utils/constants";
 import getColorXYZPosition from "../utils/getColorXYZPosition";
+import getColorXYZInAnotherSpace from "../utils/getColorXYZInAnotherSpace";
 
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
 
-function ColorSphere({ color, geometry, position: { x, y, z } }) {
+function ColorSphere({ animateToSpace, d, geometry, space, spaceRadius }) {
+  const [position, setPosition] = useState(() => {
+    const { x, y, z } = getColorXYZPosition[space](spaceRadius, d);
+    return [x, y, z];
+  });
+  const { meshPosition } = useSpring({ meshPosition: position });
+
   return (
-    <mesh geometry={geometry} position={[x, y, z]}>
+    <animated.mesh
+      geometry={geometry}
+      onClick={() => {
+        const { x, y, z } = getColorXYZInAnotherSpace({
+          animateToSpace,
+          d,
+          spaceRadius,
+        });
+        setPosition([x, y, z]);
+      }}
+      position={meshPosition}
+    >
       <meshLambertMaterial
         attach="material"
-        color={color}
+        color={d.color}
         // emissive={color}
         // emissiveIntensity={0.5}
       />
-    </mesh>
+    </animated.mesh>
   );
 }
 
 ColorSphere.propTypes = {
-  color: PropTypes.string.isRequired,
+  animateToSpace: PropTypes.oneOf(["hsl", "lab", "rgb"]),
+  d: PropTypes.shape({ color: PropTypes.string.isRequired }).isRequired,
   /** because is a ref, will be undefined on first render */
   geometry: PropTypes.object,
-  position: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    z: PropTypes.number.isRequired,
-  }).isRequired,
+  space: PropTypes.oneOf(["hsl", "lab", "rgb"]).isRequired,
+  spaceRadius: PropTypes.number.isRequired,
 };
 
 extend({ OrbitControls });
@@ -76,41 +90,12 @@ function Spotlight() {
 export default function ColorSpace({
   animateToSpace,
   data,
-  sphereRadius,
-  spaceRadius,
   space,
+  spaceRadius,
+  sphereRadius,
 }) {
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
-  const [positions, setPositions] = useState(
-    data.map(d => getColorXYZPosition[space](spaceRadius, d))
-  );
-
-  useEffect(() => {
-    setTimeout(() => {
-      setPositions(
-        data.map(d => {
-          let newColor = color[animateToSpace](color.color(d.color));
-          if (animateToSpace === "hsl") {
-            newColor.s = newColor.s * CEIL_SL;
-            newColor.l = newColor.l * CEIL_SL;
-          } else if (animateToSpace === "rgb") {
-            newColor = _.mapValues(newColor, Math.floor);
-          } else if (animateToSpace === "lab") {
-            newColor = color.lch(newColor);
-          } else {
-            throw new Error(
-              `Color space to animate to not recognized: ${animateToSpace}!`
-            );
-          }
-          return getColorXYZPosition[animateToSpace](spaceRadius, {
-            color: d.color,
-            ...newColor,
-          });
-        })
-      );
-    }, 2000);
-  });
 
   useEffect(() => {
     camera.position.set(...startingCameraPosition);
@@ -125,10 +110,12 @@ export default function ColorSpace({
       {data.map((d, i) => {
         return (
           <ColorSphere
-            color={d.color}
+            animateToSpace={animateToSpace}
+            d={d}
             geometry={geometry}
             key={`${i}-${d.color}`}
-            position={positions[i]}
+            space={space}
+            spaceRadius={spaceRadius}
           />
         );
       })}
@@ -142,6 +129,7 @@ ColorSpace.defaultProps = {
 };
 
 ColorSpace.propTypes = {
+  animateToSpace: PropTypes.oneOf(["hsl", "lab", "rgb"]),
   data: PropTypes.arrayOf(
     PropTypes.shape({ color: PropTypes.string.isRequired })
   ).isRequired,
