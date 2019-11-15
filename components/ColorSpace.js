@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -11,8 +11,6 @@ import {
 } from "react-three-fiber";
 
 import getColorXYZPosition from "../utils/getColorXYZPosition";
-import getRandomlyDistributedColors from "../utils/getRandomlyDistributedColors";
-import getUniformlyDistributedColors from "../utils/getUniformlyDistributedColors";
 
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
@@ -52,19 +50,11 @@ function Spotlight({ type }) {
 }
 
 export default function ColorSpace({
-  n = 10000,
-  r = 2,
+  data,
+  sphereRadius = 2,
   spaceRadius = 50,
   type,
-  uniform,
 }) {
-  const data = useMemo(() => {
-    if (uniform) {
-      return getUniformlyDistributedColors[type](n);
-    } else {
-      return getRandomlyDistributedColors[type](n);
-    }
-  }, [n, type, uniform]);
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
 
@@ -77,7 +67,7 @@ export default function ColorSpace({
     <>
       <CameraControls />
       <Spotlight type={type} />
-      <sphereBufferGeometry args={[r, 25, 25]} ref={geometryRef} />
+      <sphereBufferGeometry args={[sphereRadius, 25, 25]} ref={geometryRef} />
       {data.map((d, i) => (
         <ColorSphere
           color={d.color}
