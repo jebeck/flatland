@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { animated, useSpring } from "react-spring/three";
+import { animated, useSprings } from "react-spring/three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
@@ -17,29 +17,12 @@ import getColorXYZInAnotherSpace from "../utils/getColorXYZInAnotherSpace";
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
 
-function ColorSphere({ animateToSpace, d, geometry, space, spaceRadius }) {
-  const [position, setPosition] = useState(() => {
-    const { x, y, z } = getColorXYZPosition[space](spaceRadius, d);
-    return [x, y, z];
-  });
-  const { meshPosition } = useSpring({ meshPosition: position });
-
-  useEffect(() => {
-    setTimeout(() => {
-      const { x, y, z } = getColorXYZInAnotherSpace({
-        animateToSpace,
-        d,
-        spaceRadius,
-      });
-      setPosition([x, y, z]);
-    }, 1000);
-  });
-
+function ColorSphere({ color, geometry, position }) {
   return (
-    <animated.mesh geometry={geometry} position={meshPosition}>
+    <animated.mesh geometry={geometry} position={position}>
       <meshLambertMaterial
         attach="material"
-        color={d.color}
+        color={color}
         // emissive={color}
         // emissiveIntensity={0.5}
       />
@@ -48,12 +31,10 @@ function ColorSphere({ animateToSpace, d, geometry, space, spaceRadius }) {
 }
 
 ColorSphere.propTypes = {
-  animateToSpace: PropTypes.oneOf(["hsl", "lab", "rgb"]),
-  d: PropTypes.shape({ color: PropTypes.string.isRequired }).isRequired,
+  color: PropTypes.string.isRequired,
   /** because is a ref, will be undefined on first render */
   geometry: PropTypes.object,
-  space: PropTypes.oneOf(["hsl", "lab", "rgb"]).isRequired,
-  spaceRadius: PropTypes.number.isRequired,
+  position: PropTypes.object.isRequired,
 };
 
 extend({ OrbitControls });
@@ -97,6 +78,24 @@ export default function ColorSpace({
   const [geometryRef, geometry] = useResource();
   const { camera } = useThree();
 
+  const [positions, setPositions] = useSprings(data.length, i => {
+    const { x, y, z } = getColorXYZPosition[space](spaceRadius, data[i]);
+    return { meshPosition: [x, y, z] };
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPositions(i => {
+        const { x, y, z } = getColorXYZInAnotherSpace({
+          animateToSpace,
+          d: data[i],
+          spaceRadius,
+        });
+        return { meshPosition: [x, y, z] };
+      });
+    }, 1000);
+  });
+
   useEffect(() => {
     camera.position.set(...startingCameraPosition);
     camera.lookAt(...startingFocalPoint);
@@ -110,12 +109,10 @@ export default function ColorSpace({
       {data.map((d, i) => {
         return (
           <ColorSphere
-            animateToSpace={animateToSpace}
-            d={d}
+            color={d.color}
             geometry={geometry}
             key={`${i}-${d.color}`}
-            space={space}
-            spaceRadius={spaceRadius}
+            position={positions[i].meshPosition}
           />
         );
       })}
