@@ -24,19 +24,19 @@ function ColorSphere({ animateToSpace, d, geometry, space, spaceRadius }) {
   });
   const { meshPosition } = useSpring({ meshPosition: position });
 
+  useEffect(() => {
+    setTimeout(() => {
+      const { x, y, z } = getColorXYZInAnotherSpace({
+        animateToSpace,
+        d,
+        spaceRadius,
+      });
+      setPosition([x, y, z]);
+    }, 1000);
+  });
+
   return (
-    <animated.mesh
-      geometry={geometry}
-      onClick={() => {
-        const { x, y, z } = getColorXYZInAnotherSpace({
-          animateToSpace,
-          d,
-          spaceRadius,
-        });
-        setPosition([x, y, z]);
-      }}
-      position={meshPosition}
-    >
+    <animated.mesh geometry={geometry} position={meshPosition}>
       <meshLambertMaterial
         attach="material"
         color={d.color}
