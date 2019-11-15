@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { scaleLinear } from "d3-scale";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
@@ -11,42 +10,12 @@ import {
   useThree,
 } from "react-three-fiber";
 
+import getColorXYZPosition from "../utils/getColorXYZPosition";
 import getRandomlyDistributedColors from "../utils/getRandomlyDistributedColors";
 import getUniformlyDistributedColors from "../utils/getUniformlyDistributedColors";
 
-const CEIL_CHROMA = 230;
-/** hsl's saturation and lightness; lab's luminance */
-const CEIL_SL = 100;
-const CEIL_RGB = 256;
-
-/** for the cynlindrical spaces (hsl and CIELCH(ab)) */
-const RADIUS = 50;
-
-const rgbRescale = scaleLinear()
-  .domain([0, CEIL_RGB])
-  .range([-42.5, 42.5]);
-
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
-
-/** get position of color with the center of the color space at 0,0,0 instead of a vertex */
-const getPosition = {
-  hsl: ({ h, s, l }) => {
-    return [
-      RADIUS * (s / CEIL_SL) * Math.cos(h * (Math.PI / 180)),
-      l - CEIL_SL / 2,
-      RADIUS * (s / CEIL_SL) * Math.sin(h * (Math.PI / 180)),
-    ];
-  },
-  lab: ({ l, c, h }) => {
-    return [
-      RADIUS * (c / CEIL_CHROMA) * Math.cos(h * (Math.PI / 180)),
-      l - CEIL_SL / 2,
-      RADIUS * (c / CEIL_CHROMA) * Math.sin(h * (Math.PI / 180)),
-    ];
-  },
-  rgb: ({ r, g, b }) => [r, g, b].map(d => rgbRescale(d)),
-};
 
 function ColorSphere({ color, geometry, position }) {
   return (
@@ -82,7 +51,13 @@ function Spotlight({ type }) {
   return <spotLight position={startingCameraPosition} ref={spotLightRef} />;
 }
 
-export default function ColorSpace({ type, n = 10000, r = 2, uniform }) {
+export default function ColorSpace({
+  n = 10000,
+  r = 2,
+  spaceRadius = 50,
+  type,
+  uniform,
+}) {
   const data = useMemo(() => {
     if (uniform) {
       return getUniformlyDistributedColors[type](n);
@@ -108,7 +83,7 @@ export default function ColorSpace({ type, n = 10000, r = 2, uniform }) {
           color={d.color}
           geometry={geometry}
           key={`${i}-${d.color}`}
-          position={getPosition[type](d)}
+          position={getColorXYZPosition[type](spaceRadius, d)}
         />
       ))}
     </>
