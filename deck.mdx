@@ -1,20 +1,25 @@
 import { code } from "@mdx-deck/themes";
+import { Appear, Image } from "mdx-deck";
 
 import customTheme from "./theme";
 import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors";
 import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors";
 import InteractiveColorSpace from "./components/InteractiveColorSpace";
 import StitchFixLogo from "./components/StitchFixLogo";
-import { Title } from "./styled";
+import { Title, Subtitle } from "./styled";
+
+import flatlandBook from "./images/Flatland-book.jpg";
 
 export const themes = [code, customTheme];
 
 <Title>
   <h1>escaping flatland</h1>
-  <h2>a romance</h2>
-  <h3>of</h3>
-  <h2>data science</h2>
-  <h2>in the browser</h2>
+  <Subtitle>
+    <h2>a romance</h2>
+    <h3>of</h3>
+    <h2>data science</h2>
+    <h2>in the browser</h2>
+  </Subtitle>
 </Title>
 
 ---
@@ -29,4 +34,41 @@ export const themes = [code, customTheme];
 
 ---
 
+<Subtitle>
+  <h2>a romance</h2>
+  <h3>of</h3>
+  <h2>data science</h2>
+  <h2>in the browser</h2>
+</Subtitle>
+
+---
+
+<Title>
+  <h1>dimensionality reduction</h1>
+</Title>
+
+---
+
+<Title>
+  <h1>3 to 2</h1>
+  <Appear>
+    <h1>= maps!</h1>
+  </Appear>
+</Title>
+
+---
+
+# TODO: maps example
+
+<!-- TODO: maps as first example of dimensionality reduction -->
+<!-- TODO: something based on https://bl.ocks.org/mbostock/3711652 -->
+
+---
+
+<img src={flatlandBook} style="max-width: 90vw;" />
+
+---
+
 <InteractiveColorSpace {...getRandomlyDistributedColors.rgb(2000)} />
+
+---

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const textShadow = keyframes`
   to {
@@ -18,8 +18,12 @@ export const Title = styled.div`
     animation: ${textShadow} 3s ease infinite alternate;
     font-size: 2.5em;
   }
+`;
+
+export const Subtitle = styled.div`
   h2,
   h3 {
     margin: 1rem;
+    text-align: center;
   }
 `;
