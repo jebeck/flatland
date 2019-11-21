@@ -27,3 +27,9 @@ export const Subtitle = styled.div`
     text-align: center;
   }
 `;
+
+export const ScaledUpChromePicker = styled.div`
+  .chrome-picker {
+    transform: scale(3);
+  }
+`

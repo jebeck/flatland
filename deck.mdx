@@ -1,13 +1,16 @@
 import { code } from "@mdx-deck/themes";
 import { Appear, Image } from "mdx-deck";
+import { ChromePicker } from "react-color";
 
 import Credit from "./components/Credit";
 import customTheme from "./theme";
-import SphereVisitsFlatland, { startingCameraPosition } from "./components/SphereVisitsFlatland";
+import SphereVisitsFlatland, {
+  startingCameraPosition,
+} from "./components/SphereVisitsFlatland";
 import StitchFixLogo from "./components/StitchFixLogo";
 import SVGContainer from "./components/SVGContainer";
 import Three from "./components/LoadableThree";
-import { Title, Subtitle } from "./styled";
+import { Title, ScaledUpChromePicker, Subtitle } from "./styled";
 
 import equalEarth from "./images/Equal-Earth.png";
 import flatlandBook from "./images/Flatland-book.jpg";
@@ -141,9 +144,15 @@ export const themes = [code, customTheme];
 
 ---
 
-<Three camera={{fov:75, near: 0.1, far: 2000, position: startingCameraPosition }}>
+<Three camera={{ fov: 75, near: 0.1, far: 2000, position: startingCameraPosition }}>
   <SphereVisitsFlatland />
 </Three>
+
+---
+
+<ScaledUpChromePicker>
+  <ChromePicker color="#4ECEC9" disableAlpha />
+</ScaledUpChromePicker>
 
 ---
 

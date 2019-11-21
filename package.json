@@ -29,6 +29,7 @@
     "d3-scale": "^3.2.0",
     "lodash": "^4.17.15",
     "lottie-web": "^5.5.9",
+    "react-color": "^2.17.3",
     "react-flatland": "file:.yalc/react-flatland",
     "react-loadable": "^5.5.0",
     "react-lottie": "^1.2.3",
