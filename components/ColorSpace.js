@@ -40,7 +40,7 @@ ColorSphere.propTypes = {
 
 extend({ OrbitControls });
 
-function CameraControls() {
+function CameraControls({ autoRotate }) {
   const { camera } = useThree();
   const controls = useRef();
 
@@ -48,7 +48,13 @@ function CameraControls() {
 
   useRender(() => controls.current && controls.current.update());
 
-  return <orbitControls args={[camera, canvasEl]} autoRotate ref={controls} />;
+  return (
+    <orbitControls
+      args={[camera, canvasEl]}
+      autoRotate={autoRotate}
+      ref={controls}
+    />
+  );
 }
 
 CameraControls.propTypes = {
@@ -98,7 +104,7 @@ export default function ColorSpace({
 
   return (
     <group>
-      <CameraControls />
+      <CameraControls autoRotate={!animateToSpace} />
       <Spotlight />
       <sphereBufferGeometry args={[sphereRadius, 25, 25]} ref={geometryRef} />
       {data.map((d, i) => {
@@ -121,7 +127,7 @@ ColorSpace.defaultProps = {
 };
 
 ColorSpace.propTypes = {
-  animateToSpace: PropTypes.oneOf(SPACES).isRequired,
+  animateToSpace: PropTypes.oneOf(SPACES),
   data: PropTypes.arrayOf(
     PropTypes.shape({ color: PropTypes.string.isRequired })
   ).isRequired,
