@@ -1,5 +1,7 @@
 import React from "react";
 
+import FlatlandShadowBorder from "./FlatlandShadowBorder";
+
 const strokeProps = {
   fill: "none",
   stroke: "black",
@@ -12,10 +14,10 @@ const strokeProps = {
 export default function Flatland() {
   return (
     <>
-      <path d="M1741.73 34.219c9.057 0 16.216 7.563 16.216 16.68v939.898c0 9.117-7.159 16.68-16.216 16.68H181.4c-9.056 0-16.215-7.563-16.215-16.68V50.899c0-9.117 7.159-16.68 16.215-16.68h1560.33zm0 8H181.4c-4.537 0-8.215 3.886-8.215 8.68v939.898c0 4.794 3.678 8.68 8.215 8.68h1560.33c4.538 0 8.216-3.886 8.216-8.68V50.899c0-4.794-3.678-8.68-8.216-8.68z" />
+      <FlatlandShadowBorder />
       <g id="citizens">
         <line x1={612} x2={702} y1={820} y2={900} {...strokeProps} />
-        <line x1={1432} x2={1350} y1={200} y2={76} {...strokeProps} />
+        <line x1={1532} x2={1450} y1={463} y2={360} {...strokeProps} />
         <line x1={1200} x2={1280} y1={595} y2={500} {...strokeProps} />
         <circle cx={800} cy={380} r={62.5} {...strokeProps} />
         <polygon

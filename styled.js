@@ -12,7 +12,7 @@ const textShadow = keyframes`
 `;
 
 export const Title = styled.div`
-  perspective: 400px;
+  perspective: 1080px;
   text-align: center;
   h1 {
     animation: ${textShadow} 3s ease infinite alternate;
