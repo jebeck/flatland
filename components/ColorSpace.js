@@ -15,6 +15,8 @@ import getColorXYZPosition from "../utils/getColorXYZPosition";
 import getColorXYZInAnotherSpace from "../utils/getColorXYZInAnotherSpace";
 import { SPACES } from "../utils/constants";
 
+extend({ OrbitControls });
+
 const startingCameraPosition = [75, 75, 75];
 const startingFocalPoint = [0, 0, 0];
 
@@ -38,9 +40,7 @@ ColorSphere.propTypes = {
   position: PropTypes.object.isRequired,
 };
 
-extend({ OrbitControls });
-
-function CameraControls({ autoRotate }) {
+export function CameraControls({ autoRotate }) {
   const { camera } = useThree();
   const controls = useRef();
 
@@ -61,7 +61,7 @@ CameraControls.propTypes = {
   autoRotate: PropTypes.bool.isRequired,
 };
 
-function Spotlight() {
+export function Spotlight() {
   const spotLightRef = useRef();
   const { camera } = useThree();
   useFrame(() => spotLightRef.current.position.copy(camera.position));

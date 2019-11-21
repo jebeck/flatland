@@ -3,8 +3,10 @@ import { Appear, Image } from "mdx-deck";
 
 import Credit from "./components/Credit";
 import customTheme from "./theme";
+import SphereVisitsFlatland, { startingCameraPosition } from "./components/SphereVisitsFlatland";
 import StitchFixLogo from "./components/StitchFixLogo";
 import SVGContainer from "./components/SVGContainer";
+import Three from "./components/LoadableThree";
 import { Title, Subtitle } from "./styled";
 
 import equalEarth from "./images/Equal-Earth.png";
@@ -136,6 +138,12 @@ export const themes = [code, customTheme];
 <SVGContainer>
   <Flatland2 />
 </SVGContainer>
+
+---
+
+<Three camera={{fov:75, near: 0.1, far: 2000, position: startingCameraPosition }}>
+  <SphereVisitsFlatland />
+</Three>
 
 ---
 

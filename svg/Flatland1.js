@@ -2,8 +2,8 @@ import React from "react";
 
 import FlatlandShadowBorder from "./FlatlandShadowBorder";
 
-const strokeProps = {
-  fill: "none",
+export const strokeProps = {
+  fill: "black",
   stroke: "black",
   strokeWidth: 8,
   strokeLinecap: "round",

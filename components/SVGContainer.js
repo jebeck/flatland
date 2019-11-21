@@ -1,13 +1,16 @@
 import React from "react";
 
+export const bgColor = "#4A4659";
+
 export default function SVGContainer({ children }) {
   return (
     <div
       style={{
-        maxHeight: "90vh",
-        minHeight: "90vh",
-        maxWidth: "90vw",
-        minWidth: "90vw",
+        marginTop: "2vh",
+        maxHeight: "94vh",
+        minHeight: "94vh",
+        maxWidth: "96vw",
+        minWidth: "96vw",
       }}
     >
       <svg
@@ -29,7 +32,7 @@ export default function SVGContainer({ children }) {
           </clipPath>
           <rect id="bg" height={1080} width={1920} />
         </defs>
-        <use clipPath="url(#bg-clip)" fill="#4A4659" xlinkHref="#bg" />
+        <use clipPath="url(#bg-clip)" fill={bgColor} xlinkHref="#bg" />
         {children}
       </svg>
     </div>
