@@ -1,15 +1,13 @@
 import { code } from "@mdx-deck/themes";
 import { Appear, Image } from "mdx-deck";
 
+import Credit from "./components/Credit";
 import customTheme from "./theme";
-import EdwinAbbottAbbott from "./components/EdwinAbbottAbbott";
-import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors";
-import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors";
-import InteractiveColorSpace from "./components/InteractiveColorSpace";
 import StitchFixLogo from "./components/StitchFixLogo";
 import { Title, Subtitle } from "./styled";
 
 import flatlandBook from "./images/Flatland-book.jpg";
+import watermansButterfly from "./images/Watermans-Butterfly.png";
 
 export const themes = [code, customTheme];
 
@@ -59,21 +57,15 @@ export const themes = [code, customTheme];
 
 ---
 
-# TODO: maps example
-
-<!-- TODO: maps as first example of dimensionality reduction -->
-<!-- TODO: something based on https://bl.ocks.org/mbostock/3711652 -->
+<img src={watermansButterfly} style="max-height: 90vh;" />
+<Credit
+  asset="Waterman's Butterfly Map Projection"
+  author="Mike Bostock"
+  link="https://observablehq.com/@d3/watermans-butterfly?collection=@d3/d3-geo-projection"
+/>
 
 ---
 
 <img src={flatlandBook} style="max-width: 90vw;" />
-
----
-
-<EdwinAbbottAbbott />
-
----
-
-<InteractiveColorSpace {...getRandomlyDistributedColors.rgb(2000)} />
 
 ---
