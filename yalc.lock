@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "react-flatland": {
+      "signature": "4bf0091be8fce593cd0a5fb2a2483a62",
+      "file": true
+    }
+  }
+}
