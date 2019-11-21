@@ -4,10 +4,17 @@ import { Appear, Image } from "mdx-deck";
 import Credit from "./components/Credit";
 import customTheme from "./theme";
 import StitchFixLogo from "./components/StitchFixLogo";
+import SVGContainer from "./components/SVGContainer";
 import { Title, Subtitle } from "./styled";
 
+import equalEarth from "./images/Equal-Earth.png";
 import flatlandBook from "./images/Flatland-book.jpg";
+import flatlandTitleAuthor from "./images/Flatland-title-author.png";
+import mercator from "./images/Mercator.png";
 import watermansButterfly from "./images/Watermans-Butterfly.png";
+
+import Browser from "./svg/Browser";
+import BrowserWithMainThread from "./svg/BrowserWithMainThread";
 
 export const themes = [code, customTheme];
 
@@ -57,6 +64,24 @@ export const themes = [code, customTheme];
 
 ---
 
+<img src={mercator} style="max-height: 90vh;" />
+<Credit
+  asset="Mercator Projection"
+  author="Mike Bostock"
+  link="https://observablehq.com/@d3/mercator?collection=@d3/d3-geo"
+/>
+
+---
+
+<img src={equalEarth} style="max-height: 90vh;" />
+<Credit
+  asset="Equal Earth Projection"
+  author="Mike Bostock"
+  link="https://observablehq.com/@d3/equal-earth?collection=@d3/d3-geo"
+/>
+
+---
+
 <img src={watermansButterfly} style="max-height: 90vh;" />
 <Credit
   asset="Waterman's Butterfly Map Projection"
@@ -67,5 +92,47 @@ export const themes = [code, customTheme];
 ---
 
 <img src={flatlandBook} style="max-width: 90vw;" />
+
+---
+
+<img src={flatlandTitleAuthor} style="max-width: 90vw;" />
+
+---
+
+# a. square
+
+---
+
+# edwin abbott abbott
+
+---
+
+# abbott x abbott
+
+---
+
+# a²
+
+---
+
+# a squared
+
+---
+
+<img src={flatlandTitleAuthor} style="max-width: 90vw;" />
+
+# a. square
+
+---
+
+<SVGContainer>
+  <Browser />
+</SVGContainer>
+
+---
+
+<SVGContainer>
+  <BrowserWithMainThread />
+</SVGContainer>
 
 ---
