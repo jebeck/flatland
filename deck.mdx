@@ -5,8 +5,11 @@ import { CodeSurfer } from "code-surfer"
 import { nightOwl } from "@code-surfer/themes"
 import { ChromePicker } from "react-color"
 
+import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors"
+
 import Credit from "./components/Credit"
-import customTheme from "./theme"
+import InteractiveColorSpace from "./components/InteractiveColorSpace"
+import ColorSpace from "./components/LoadableColorSpace"
 import SphereVisitsFlatland, {
   startingCameraPosition,
 } from "./components/SphereVisitsFlatland"
@@ -19,6 +22,7 @@ import equalEarth from "./images/Equal-Earth.png"
 import flatlandBook from "./images/Flatland-book.jpg"
 import flatlandTitleAuthor from "./images/Flatland-title-author.png"
 import mercator from "./images/Mercator.png"
+import offscreenCanvas from "./images/OffscreenCanvas.png"
 import tensorFlowJs from "./images/TensorFlowjs.png"
 import umapJs from "./images/umap-js.png"
 import watermansButterfly from "./images/Watermans-Butterfly.png"
@@ -30,6 +34,7 @@ import MainAndWorkers from "./svg/MainAndWorkers"
 import Flatland1 from "./svg/Flatland1"
 import Flatland2 from "./svg/Flatland2"
 
+import customTheme from "./theme"
 export const themes = [code, customTheme]
 const sphereVisitCamera = {
   fov: 75,
@@ -272,19 +277,13 @@ const sphereVisitCamera = {
 ---
 
 <CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/worker-template.js title="worker template"
-  ```
-
+  ```js file=./code/worker-template.js title="worker template" ```
 </CodeSurfer>
 
 ---
 
 <CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/app-template.js title="app-side template"
-  ```
-
+  ```js file=./code/app-template.js title="app-side template" ```
 </CodeSurfer>
 
 ---
@@ -292,8 +291,9 @@ const sphereVisitCamera = {
 # toolchain support
 
 - ✅&nbsp;Webpack
-  * worker-loader (\*.worker.js)
-  * workerize-loader
+
+  - worker-loader (\*.worker.js)
+  - workerize-loader
 
 - ✅&nbsp;Parcel
 - (❓) rollup
@@ -335,16 +335,83 @@ const sphereVisitCamera = {
 ---
 
 <CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/transferable-objects.js title="transferable objects"
-  ```
-
+  ```js file=./code/transferable-objects.js title="transferable objects" ```
 </CodeSurfer>
 
 ---
+
+<img src={offscreenCanvas} style="max-height: 90vh;" />
+
+---
+
+# 👷🏾‍♀️ Workers in action! 👷🏻
+
+---
+
+<Title>
+  <h1>dimensionality reduction</h1>
+</Title>
+
+## for visualization
+
+---
+
+<List>
+  <li>
+    t-SNE&nbsp;<small>(t-Distributed Stochastic Neighbor Embedding)</small>
+  </li>
+  <li>
+    <small>and</small>
+  </li>
+  <li>
+    UMAP&nbsp;<small>(Uniform Manifold Approximation and Projection)</small>
+  </li>
+</List>
+
+---
+
+<List>
+  <li style="color: #4ECEC9;">rgb(78,206,201)</li>
+  <li style="color: #4ECEC9;">hsl(0.49, 57%, 56%)</li>
+  <li style="color: #4ECEC9;">lab(76, -36, -8)</li>
+</List>
 
 ---
 
 <ScaledUpChromePicker>
   <ChromePicker color="#4ECEC9" disableAlpha />
 </ScaledUpChromePicker>
+
+---
+
+<Three>
+  <ColorSpace
+    cameraPosition={[90, 50, 75]}
+    orbitTarget={[0, 0, 25]}
+    {...getRandomlyDistributedColors.hsl(2000)}
+  />
+</Three>
+
+---
+
+<Three>
+  <ColorSpace
+    cameraPosition={[90, 50, 75]}
+    orbitTarget={[0, 0, 25]}
+    {...getRandomlyDistributedColors.rgb(2000)}
+  />
+</Three>
+
+---
+
+<Three>
+  <ColorSpace
+    cameraPosition={[90, 50, 75]}
+    orbitTarget={[0, 0, 25]}
+    {...getRandomlyDistributedColors.lab(2000)}
+  />
+</Three>
+
+---
+
+<InteractiveColorSpace {...getRandomlyDistributedColors.lab(2000)} />
