@@ -1,4 +1,4 @@
-import { color, lab, lch, rgb } from "d3-color"
+import { color, lab, lch } from "d3-color"
 import { range } from "d3-array"
 
 import {

@@ -6,9 +6,12 @@ import { nightOwl } from "@code-surfer/themes"
 import { ChromePicker } from "react-color"
 
 import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors"
+import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors"
+import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
 
 import Credit from "./components/Credit"
 import InteractiveColorSpace from "./components/InteractiveColorSpace"
+import InteractiveUMAPColorSpace from "./components/InteractiveUMAPColorSpace"
 import ColorSpace from "./components/LoadableColorSpace"
 import SphereVisitsFlatland, {
   startingCameraPosition,
@@ -388,7 +391,7 @@ const sphereVisitCamera = {
   <ColorSpace
     cameraPosition={[90, 50, 75]}
     orbitTarget={[0, 0, 25]}
-    {...getRandomlyDistributedColors.hsl(2000)}
+    {...getUniformlyDistributedColors.hsl(15)}
   />
 </Three>
 
@@ -398,7 +401,7 @@ const sphereVisitCamera = {
   <ColorSpace
     cameraPosition={[90, 50, 75]}
     orbitTarget={[0, 0, 25]}
-    {...getRandomlyDistributedColors.rgb(2000)}
+    {...getUniformlyDistributedColors.rgb(15)}
   />
 </Three>
 
@@ -408,10 +411,31 @@ const sphereVisitCamera = {
   <ColorSpace
     cameraPosition={[90, 50, 75]}
     orbitTarget={[0, 0, 25]}
-    {...getRandomlyDistributedColors.lab(2000)}
+    {...getUniformlyDistributedColors.lab(15)}
   />
 </Three>
 
 ---
 
 <InteractiveColorSpace {...getRandomlyDistributedColors.lab(2000)} />
+
+---
+
+<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.hsl(2000)} />
+
+---
+
+<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.rgb(2000)} />
+
+---
+
+<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.lab(2000)} />
+
+---
+
+<InteractiveUMAPColorSpace
+  data={getRandomColorsFromAllSpaces(3000)}
+  dimensions={3}
+  exclude={["color", "r", "g", "b"]}
+  space="rgb"
+/>
