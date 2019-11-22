@@ -16,10 +16,14 @@ import equalEarth from "./images/Equal-Earth.png";
 import flatlandBook from "./images/Flatland-book.jpg";
 import flatlandTitleAuthor from "./images/Flatland-title-author.png";
 import mercator from "./images/Mercator.png";
+import tensorFlowJs from "./images/TensorFlowjs.png"
+import umapJs from "./images/umap-js.png"
 import watermansButterfly from "./images/Watermans-Butterfly.png";
+import worldWideWeb from "./images/WorldWideWeb.png"
 
 import Browser from "./svg/Browser";
 import BrowserWithMainThread from "./svg/BrowserWithMainThread";
+import MainAndWorkers from "./svg/MainAndWorkers"
 import Flatland1 from "./svg/Flatland1";
 import Flatland2 from "./svg/Flatland2";
 
@@ -80,7 +84,7 @@ export const themes = [code, customTheme];
 
 ---
 
-<img src={equalEarth} style="max-height: 90vh;" />
+<img src={equalEarth} style="max-width: 90vw;" />
 <Credit
   asset="Equal Earth Projection"
   author="Mike Bostock"
@@ -150,15 +154,22 @@ export const themes = [code, customTheme];
 
 ---
 
-<ScaledUpChromePicker>
-  <ChromePicker color="#4ECEC9" disableAlpha />
-</ScaledUpChromePicker>
-
----
-
 <SVGContainer>
   <Browser />
 </SVGContainer>
+
+---
+
+<img src={worldWideWeb} style="max-height: 90vh;" />
+
+---
+
+<img src={tensorFlowJs}style="max-height: 90vh;" />
+
+---
+
+<img src={umapJs} style="max-height: 90vh;"/>
+
 
 ---
 
@@ -167,3 +178,18 @@ export const themes = [code, customTheme];
 </SVGContainer>
 
 ---
+
+<SVGContainer>
+  <Browser>
+    <MainAndWorkers/>
+  </Browser>
+</SVGContainer>
+
+
+---
+
+<ScaledUpChromePicker>
+  <ChromePicker color="#4ECEC9" disableAlpha />
+</ScaledUpChromePicker>
+
+
