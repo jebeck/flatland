@@ -1,33 +1,48 @@
-import { code } from "@mdx-deck/themes";
-import { Appear, Image } from "mdx-deck";
-import { ChromePicker } from "react-color";
+import { code } from "@mdx-deck/themes"
+import { Appear, Head, Horizontal, Image } from "mdx-deck"
 
-import Credit from "./components/Credit";
-import customTheme from "./theme";
+import { CodeSurfer } from "code-surfer"
+import { nightOwl } from "@code-surfer/themes"
+import { ChromePicker } from "react-color"
+
+import Credit from "./components/Credit"
+import customTheme from "./theme"
 import SphereVisitsFlatland, {
   startingCameraPosition,
-} from "./components/SphereVisitsFlatland";
-import StitchFixLogo from "./components/StitchFixLogo";
-import SVGContainer from "./components/SVGContainer";
-import Three from "./components/LoadableThree";
-import { Title, ScaledUpChromePicker, Subtitle } from "./styled";
+} from "./components/SphereVisitsFlatland"
+import StitchFixLogo from "./components/StitchFixLogo"
+import SVGContainer from "./components/SVGContainer"
+import Three from "./components/LoadableThree"
+import { List, ScaledUpChromePicker, Subtitle, Title } from "./styled"
 
-import equalEarth from "./images/Equal-Earth.png";
-import flatlandBook from "./images/Flatland-book.jpg";
-import flatlandTitleAuthor from "./images/Flatland-title-author.png";
-import mercator from "./images/Mercator.png";
+import equalEarth from "./images/Equal-Earth.png"
+import flatlandBook from "./images/Flatland-book.jpg"
+import flatlandTitleAuthor from "./images/Flatland-title-author.png"
+import mercator from "./images/Mercator.png"
 import tensorFlowJs from "./images/TensorFlowjs.png"
 import umapJs from "./images/umap-js.png"
-import watermansButterfly from "./images/Watermans-Butterfly.png";
+import watermansButterfly from "./images/Watermans-Butterfly.png"
 import worldWideWeb from "./images/WorldWideWeb.png"
 
-import Browser from "./svg/Browser";
-import BrowserWithMainThread from "./svg/BrowserWithMainThread";
+import Browser from "./svg/Browser"
+import BrowserWithMainThread from "./svg/BrowserWithMainThread"
 import MainAndWorkers from "./svg/MainAndWorkers"
-import Flatland1 from "./svg/Flatland1";
-import Flatland2 from "./svg/Flatland2";
+import Flatland1 from "./svg/Flatland1"
+import Flatland2 from "./svg/Flatland2"
 
-export const themes = [code, customTheme];
+export const themes = [code, customTheme]
+const sphereVisitCamera = {
+  fov: 75,
+  near: 0.1,
+  far: 2000,
+  position: startingCameraPosition,
+}
+
+<Head>
+  <title>escaping flatland</title>
+</Head>
+
+---
 
 <Title>
   <h1>escaping flatland</h1>
@@ -148,7 +163,7 @@ export const themes = [code, customTheme];
 
 ---
 
-<Three camera={{ fov: 75, near: 0.1, far: 2000, position: startingCameraPosition }}>
+<Three camera={sphereVisitCamera}>
   <SphereVisitsFlatland />
 </Three>
 
@@ -164,12 +179,11 @@ export const themes = [code, customTheme];
 
 ---
 
-<img src={tensorFlowJs}style="max-height: 90vh;" />
+<img src={tensorFlowJs} style="max-height: 90vh;" />
 
 ---
 
-<img src={umapJs} style="max-height: 90vh;"/>
-
+<img src={umapJs} style="max-height: 90vh;" />
 
 ---
 
@@ -181,15 +195,156 @@ export const themes = [code, customTheme];
 
 <SVGContainer>
   <Browser>
-    <MainAndWorkers/>
+    <MainAndWorkers />
   </Browser>
 </SVGContainer>
 
+---
+
+# 👷🏾‍♀️ Web Workers 👷🏻
+
+<a
+  href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  (MDN page)
+</a>
+
+---
+
+<Horizontal>
+  <List>
+    <li>✅&nbsp;XHR</li>
+    <li>✅&nbsp;self</li>
+  </List>
+  <List>
+    <li>✖️&nbsp;DOM</li>
+    <li>✖️&nbsp;window</li>
+  </List>
+</Horizontal>
+
+---
+
+# data transfer
+
+## ✉️ ↔️ ✉️
+
+## via message passing
+
+---
+
+<List fontSize="4rem">
+  <li>data is copied, not shared</li>
+  <li>and serialized/deserialized</li>
+  <li>
+    ...via&nbsp;
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      structured cloning
+    </a>
+  </li>
+</List>
+
+---
+
+# what's serializable?
+
+---
+
+<Split>
+  <List fontSize="4rem">
+    <li>✅&nbsp;primitive&nbsp;types</li>
+    <li>✅&nbsp;Date</li>
+    <li>✅&nbsp;Blob</li>
+    <li>✅&nbsp;ArrayBuffer</li>
+  </List>
+  <List fontSize="4rem">
+    <li>✖️&nbsp;DOM nodes</li>
+    <li>✖️&nbsp;Error</li>
+    <li>✖️&nbsp;functions</li>
+  </List>
+</Split>
+
+---
+
+<CodeSurfer theme={nightOwl}>
+
+  ```js file=./code/worker-template.js title="worker template"
+  ```
+
+</CodeSurfer>
+
+---
+
+<CodeSurfer theme={nightOwl}>
+
+  ```js file=./code/app-template.js title="app-side template"
+  ```
+
+</CodeSurfer>
+
+---
+
+# toolchain support
+
+- ✅&nbsp;Webpack
+  * worker-loader (\*.worker.js)
+  * workerize-loader
+
+- ✅&nbsp;Parcel
+- (❓) rollup
+
+---
+
+# there's more! 😮
+
+<List fontSize="4.5rem">
+  <li>
+    <a
+      href="https://developers.google.com/web/updates/2011/12/Transferable-Objects-Lightning-Fast"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      transferable objects
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      OffscreenCanvas
+    </a>
+  </li>
+</List>
+
+---
+
+# transferable objects
+
+<List fontSize="4.5rem">
+  <li>zero copy</li>
+  <li>≈ pass by ref</li>
+</List>
+
+---
+
+<CodeSurfer theme={nightOwl}>
+
+  ```js file=./code/transferable-objects.js title="transferable objects"
+  ```
+
+</CodeSurfer>
+
+---
 
 ---
 
 <ScaledUpChromePicker>
   <ChromePicker color="#4ECEC9" disableAlpha />
 </ScaledUpChromePicker>
-
-

@@ -28,8 +28,21 @@ export const Subtitle = styled.div`
   }
 `;
 
+export const List = styled.ul`
+  font-size: ${props => props.fontSize || "6rem"};
+  font-weight: bold;
+  list-style-type: none;
+  margin-top: 0;
+  padding: 4rem;
+  text-align: left;
+
+  li {
+    padding: 1rem;
+  }
+`;
+
 export const ScaledUpChromePicker = styled.div`
   .chrome-picker {
     transform: scale(3);
   }
-`
+`;
