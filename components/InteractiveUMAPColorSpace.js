@@ -12,7 +12,7 @@ export default function InteractiveUMAPColorSpace(props) {
   const { coordinates } = useUMAP(
     useMemo(
       () => ({
-        data: props.data,
+        data,
         debugLogs: true,
         exclude: props.exclude || ["color"],
         iterate: false,
