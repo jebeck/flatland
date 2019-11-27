@@ -25,9 +25,11 @@
   "dependencies": {
     "@code-surfer/themes": "^3.0.0-beta.0",
     "code-surfer": "^3.0.0-beta.1",
+    "d3": "^5.14.2",
     "d3-array": "^2.4.0",
     "d3-color": "^1.4.0",
     "d3-scale": "^3.2.0",
+    "gsap": "^3.0.1",
     "lodash": "^4.17.15",
     "lottie-web": "^5.5.9",
     "mdx-deck": "^3.0.13",
