@@ -1,5 +1,5 @@
 import { code } from "@mdx-deck/themes"
-import { Appear, Head, Horizontal, Image } from "mdx-deck"
+import { Appear, Head, Horizontal, Image, Split } from "mdx-deck"
 
 import { CodeSurfer } from "code-surfer"
 import { nightOwl } from "@code-surfer/themes"
@@ -9,11 +9,12 @@ import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors"
 import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors"
 import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
 
+import AnimateToUMAPColorSpace from "./components/AnimateToUMAPColorSpace"
+import ColorSpace from "./components/LoadableColorSpace"
 import Credit from "./components/Credit"
 import InteractiveColorSpace from "./components/InteractiveColorSpace"
 import InteractiveUMAPColorSpace from "./components/InteractiveUMAPColorSpace"
-import AnimateToUMAPColorSpace from "./components/AnimateToUMAPColorSpace"
-import ColorSpace from "./components/LoadableColorSpace"
+import SingleMNISTDigit from './components/SingleMNISTDigit'
 import SphereVisitsFlatland, {
   startingCameraPosition,
 } from "./components/SphereVisitsFlatland"
@@ -26,6 +27,7 @@ import equalEarth from "./images/Equal-Earth.png"
 import flatlandBook from "./images/Flatland-book.jpg"
 import flatlandTitleAuthor from "./images/Flatland-title-author.png"
 import mercator from "./images/Mercator.png"
+import mnistDigits from './images/MNIST_digits.png'
 import offscreenCanvas from "./images/OffscreenCanvas.png"
 import tensorFlowJs from "./images/TensorFlowjs.png"
 import umapJs from "./images/umap-js.png"
@@ -122,6 +124,67 @@ const sphereVisitCamera = {
 ---
 
 <AnimateToUMAPColorSpace {...getUniformlyDistributedColors.hsl(13)} />
+
+---
+
+<img src={mnistDigits} style={{opacity: '12.5%', position: 'absolute', top: '5vh', height: '90vh', maxWidth: '90vw'}}/>
+<Title>
+  <h1>the MNIST digits dataset</h1>
+</Title>
+
+---
+
+# one digit
+
+## 28 <span>&times;</span> 28 pixels
+
+## = 28 <span>&times;</span> 28 = 784 dimensions
+
+---
+
+<SingleMNISTDigit />
+
+---
+
+<SingleMNISTDigit overlay />
+
+---
+
+<SingleMNISTDigit coordinates overlay />
+
+---
+
+<Split>
+
+<SingleMNISTDigit coordinates highlight={[8, 7]} overlay />
+
+<div style={{ padding: '1rem' }}>
+
+|       | ... | 8,7   | 9,7 | ... |
+| ----- | --- | ----- | --- | --- |
+| img_0 | ... | **0** | 1   | ... |
+| img_1 | ... | ...   | ... | ... |
+
+</div>
+
+</Split>
+
+---
+
+<Split>
+
+<SingleMNISTDigit coordinates highlight={[9, 7]} overlay />
+
+<div style={{ padding: '1rem' }}>
+
+|       | ... | 8,7 | 9,7   | ... |
+| ----- | --- | --- | ----- | --- |
+| img_0 | ... | 0   | **1** | ... |
+| img_1 | ... | ... | ...   | ... |
+
+</div>
+
+</Split>
 
 ---
 
