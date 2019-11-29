@@ -3,9 +3,11 @@ import { range } from "d3-array";
 
 import singleDigit from "../images/MNIST_eight.png";
 
-const SIZE = 28 * 30;
+const N = 10;
 
-const VIEW_SIZE = 280;
+const SIZE = N * 75;
+
+const VIEW_SIZE = N * 10;
 
 export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
   return (
@@ -15,9 +17,9 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
         backgroundColor: "ghostwhite",
         display: "flex",
         flexDirection: "column",
-        height: highlight ? SIZE / 1.75 + 28 : SIZE + 56,
+        height: highlight ? SIZE / 1.75 + N : SIZE + 56,
         justifyContent: "center",
-        width: highlight ? SIZE / 1.75 + 28 : SIZE + 56,
+        width: highlight ? SIZE / 1.75 + N : SIZE + 56,
       }}
     >
       <svg
@@ -45,19 +47,19 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
                   strokeWidth=".75px"
                   x1={0}
                   x2={VIEW_SIZE}
-                  y1={((i + 1) * VIEW_SIZE) / 28}
-                  y2={((i + 1) * VIEW_SIZE) / 28}
+                  y1={((i + 1) * VIEW_SIZE) / N}
+                  y2={((i + 1) * VIEW_SIZE) / N}
                 />
               ))}
             </g>
             <g id="vertical-lines">
-              {range(0, 27).map((d, i) => (
+              {range(0, N - 1).map((d, i) => (
                 <line
                   key={d}
                   stroke="#f05d61"
                   strokeWidth=".75px"
-                  x1={((i + 1) * VIEW_SIZE) / 28}
-                  x2={((i + 1) * VIEW_SIZE) / 28}
+                  x1={((i + 1) * VIEW_SIZE) / N}
+                  x2={((i + 1) * VIEW_SIZE) / N}
                   y1={0}
                   y2={VIEW_SIZE}
                 />
@@ -68,7 +70,7 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
         {coordinates ? (
           <>
             <g id="horizontal-coordinates">
-              {range(0, 28).map((d, i) => (
+              {range(0, N).map((d, i) => (
                 <text
                   dominantBaseline="middle"
                   fontSize="6px"

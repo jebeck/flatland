@@ -136,9 +136,9 @@ const sphereVisitCamera = {
 
 # one digit
 
-## 28 <span>&times;</span> 28 pixels
+## 10 <span>&times;</span> 10 pixels
 
-## = 28 <span>&times;</span> 28 = 784 dimensions
+## = 10 <span>&times;</span> 10 = 100 dimensions
 
 ---
 
@@ -156,13 +156,13 @@ const sphereVisitCamera = {
 
 <Split>
 
-<SingleMNISTDigit coordinates highlight={[8, 7]} overlay />
+<SingleMNISTDigit coordinates highlight={[2,2]} overlay />
 
 <div style={{ padding: '1rem' }}>
 
-|       | ... | 8,7   | 9,7 | ... |
+|       | ... | 2,2   | 3,2 | ... |
 | ----- | --- | ----- | --- | --- |
-| img_0 | ... | **0** | 1   | ... |
+| img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 1   | ... |
 | img_1 | ... | ...   | ... | ... |
 
 </div>
@@ -173,13 +173,13 @@ const sphereVisitCamera = {
 
 <Split>
 
-<SingleMNISTDigit coordinates highlight={[9, 7]} overlay />
+<SingleMNISTDigit coordinates highlight={[3,2]} overlay />
 
 <div style={{ padding: '1rem' }}>
 
-|       | ... | 8,7 | 9,7   | ... |
+|       | ... | 2,2 | 3,2   | ... |
 | ----- | --- | --- | ----- | --- |
-| img_0 | ... | 0   | **1** | ... |
+| img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>1</span> | ... |
 | img_1 | ... | ... | ...   | ... |
 
 </div>
