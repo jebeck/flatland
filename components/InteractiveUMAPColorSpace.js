@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState } from "react";
 
-import { useUMAP } from "react-flatland"
+import { useUMAP } from "react-flatland";
 
-import LoadableUMAPColorSpace from "./LoadableUMAPColorSpace"
-import LoadableThree from "./LoadableThree"
+import LoadableUMAPColorSpace from "./LoadableUMAPColorSpace";
+import LoadableThree from "./LoadableThree";
 
 export default function InteractiveUMAPColorSpace(props) {
-  const { data, dimensions, exclude } = props
-  const [go, setGo] = useState(false)
+  const { data, dimensions, exclude } = props;
+  const [go, setGo] = useState(false);
 
   const { coordinates } = useUMAP(
     useMemo(
@@ -18,16 +18,17 @@ export default function InteractiveUMAPColorSpace(props) {
         iterate: false,
         params: { dimensions },
       }),
-      [data, dimensions, exclude]
+      [data, dimensions, props.exclude]
     )
-  )
+  );
+  // console.log(JSON.stringify(new Float32Array(coordinates)));
 
   return (
     <>
       <button
         disabled={!coordinates.byteLength}
         onClick={() => {
-          setGo(true)
+          setGo(true);
         }}
         style={{
           backgroundColor: "#9ab0e5",
@@ -49,5 +50,5 @@ export default function InteractiveUMAPColorSpace(props) {
         />
       </LoadableThree>
     </>
-  )
+  );
 }

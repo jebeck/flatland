@@ -12,6 +12,7 @@ import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
 import Credit from "./components/Credit"
 import InteractiveColorSpace from "./components/InteractiveColorSpace"
 import InteractiveUMAPColorSpace from "./components/InteractiveUMAPColorSpace"
+import AnimateToUMAPColorSpace from "./components/AnimateToUMAPColorSpace"
 import ColorSpace from "./components/LoadableColorSpace"
 import SphereVisitsFlatland, {
   startingCameraPosition,
@@ -89,15 +90,6 @@ const sphereVisitCamera = {
 
 ---
 
-<Title>
-  <h1>3 to 2</h1>
-  <Appear>
-    <h1>= maps!</h1>
-  </Appear>
-</Title>
-
----
-
 <img src={mercator} style="max-height: 90vh;" />
 <Credit
   asset="Mercator Projection"
@@ -122,6 +114,14 @@ const sphereVisitCamera = {
   author="Mike Bostock"
   link="https://observablehq.com/@d3/watermans-butterfly?collection=@d3/d3-geo-projection"
 />
+
+---
+
+<AnimateToUMAPColorSpace {...getUniformlyDistributedColors.rgb(13)} />
+
+---
+
+<AnimateToUMAPColorSpace {...getUniformlyDistributedColors.hsl(13)} />
 
 ---
 
