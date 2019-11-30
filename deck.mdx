@@ -10,6 +10,7 @@ import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors
 import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
 
 import AnimateToUMAPColorSpace from "./components/AnimateToUMAPColorSpace"
+import AnimateToUMAPMNISTDigits from './components/LoadableAnimateToUMAPMNISTDigits'
 import ColorSpace from "./components/LoadableColorSpace"
 import Credit from "./components/Credit"
 import InteractiveColorSpace from "./components/InteractiveColorSpace"
@@ -50,6 +51,7 @@ const sphereVisitCamera = {
 }
 
 <Head>
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet" />
   <title>escaping flatland</title>
 </Head>
 
@@ -155,36 +157,34 @@ const sphereVisitCamera = {
 ---
 
 <Split>
+  <SingleMNISTDigit coordinates highlight={[2,2]} overlay />
+  <div style={{ padding: '1rem' }}>
 
-<SingleMNISTDigit coordinates highlight={[2,2]} overlay />
+  |       | ... | 2,2   | 3,2 | ... |
+  | ----- | --- | ----- | --- | --- |
+  | img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 1   | ... |
+  | img_1 | ... | ...   | ... | ... |
 
-<div style={{ padding: '1rem' }}>
-
-|       | ... | 2,2   | 3,2 | ... |
-| ----- | --- | ----- | --- | --- |
-| img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 1   | ... |
-| img_1 | ... | ...   | ... | ... |
-
-</div>
-
+  </div>
 </Split>
 
 ---
 
 <Split>
+  <SingleMNISTDigit coordinates highlight={[3,2]} overlay />
+  <div style={{ padding: '1rem' }}>
 
-<SingleMNISTDigit coordinates highlight={[3,2]} overlay />
+  |       | ... | 2,2 | 3,2   | ... |
+  | ----- | --- | --- | ----- | --- |
+  | img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>1</span> | ... |
+  | img_1 | ... | ... | ...   | ... |
 
-<div style={{ padding: '1rem' }}>
-
-|       | ... | 2,2 | 3,2   | ... |
-| ----- | --- | --- | ----- | --- |
-| img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>1</span> | ... |
-| img_1 | ... | ... | ...   | ... |
-
-</div>
-
+  </div>
 </Split>
+
+---
+
+<AnimateToUMAPMNISTDigits/>
 
 ---
 
