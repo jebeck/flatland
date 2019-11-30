@@ -53,8 +53,6 @@ const sphereVisitCamera = {
   <title>escaping flatland</title>
 </Head>
 
----
-
 <Title>
   <h1>escaping flatland</h1>
   <Subtitle>
@@ -119,6 +117,27 @@ const sphereVisitCamera = {
 
 ---
 
+<Title>
+  <h1>U M A P</h1>
+  <h2>Uniform Manifold Approximation & Projection</h2>
+</Title>
+
+---
+
+<div>
+
+  | color | r | g | b |
+  | --- | --- | --- | --- |
+  | <span style={{color: 'black', fontWeight: 'bold', textShadow: '0px 0px 5px #aaa'}}>black</span> | 0 | 0 | 0 |
+  | <span style={{color: 'white', fontWeight: 'bold', textShadow: '0px 0px 5px #aaa'}}>white</span> | 255 | 255 | 255 |
+  | <span style={{color: 'red', fontWeight: 'bold', textShadow: '0px 0px 5px #aaa'}}>red</span> | 255 | 0 | 0 |
+  | <span style={{color: 'green', fontWeight: 'bold', textShadow: '0px 0px 5px #aaa'}}>green</span> | 0 | 255 | 0 |
+  | <span style={{color: 'blue', fontWeight: 'bold', textShadow: '0px 0px 5px #aaa'}}>blue</span> | 0 | 0 | 255 |
+
+</div>
+
+---
+
 <AnimateToUMAPColorSpace {...getUniformlyDistributedColors.rgb(13)} />
 
 ---
@@ -158,10 +177,10 @@ const sphereVisitCamera = {
   <SingleMNISTDigit coordinates highlight={[2,2]} overlay />
   <div style={{ padding: '1rem' }}>
 
-  |       | ... | 2,2   | 3,2 | ... |
-  | ----- | --- | ----- | --- | --- |
-  | img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 1   | ... |
-  | img_1 | ... | ...   | ... | ... |
+  |       | ... | 2,2   | 3,2 |
+  | ----- | --- | ----- | --- |
+  | img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 0.82573   |
+  | img_1 | ... | ...   | ... |
 
   </div>
 </Split>
@@ -172,10 +191,10 @@ const sphereVisitCamera = {
   <SingleMNISTDigit coordinates highlight={[3,2]} overlay />
   <div style={{ padding: '1rem' }}>
 
-  |       | ... | 2,2 | 3,2   | ... |
-  | ----- | --- | --- | ----- | --- |
-  | img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>1</span> | ... |
-  | img_1 | ... | ... | ...   | ... |
+  |       | ... | 2,2 | 3,2   |
+  | ----- | --- | --- | ----- |
+  | img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>0.82573</span> |
+  | img_1 | ... | ... | ...   |
 
   </div>
 </Split>
@@ -187,6 +206,10 @@ const sphereVisitCamera = {
 ---
 
 <img src={flatlandBook} style="max-width: 90vw;" />
+
+---
+
+# edwin abbott abbott
 
 ---
 
@@ -395,85 +418,3 @@ const sphereVisitCamera = {
 
 ---
 
-<Title>
-  <h1>dimensionality reduction</h1>
-</Title>
-
-## for visualization
-
----
-
-<List>
-  <li>
-    t-SNE&nbsp;<small>(t-Distributed Stochastic Neighbor Embedding)</small>
-  </li>
-  <li>
-    <small>and</small>
-  </li>
-  <li>
-    UMAP&nbsp;<small>(Uniform Manifold Approximation and Projection)</small>
-  </li>
-</List>
-
----
-
-<List>
-  <li style="color: #4ECEC9;">rgb(78,206,201)</li>
-  <li style="color: #4ECEC9;">hsl(0.49, 57%, 56%)</li>
-  <li style="color: #4ECEC9;">lab(76, -36, -8)</li>
-</List>
-
----
-
-<Three>
-  <ColorSpace
-    cameraPosition={[90, 50, 75]}
-    orbitTarget={[0, 0, 25]}
-    {...getUniformlyDistributedColors.hsl(15)}
-  />
-</Three>
-
----
-
-<Three>
-  <ColorSpace
-    cameraPosition={[90, 50, 75]}
-    orbitTarget={[0, 0, 25]}
-    {...getUniformlyDistributedColors.rgb(15)}
-  />
-</Three>
-
----
-
-<Three>
-  <ColorSpace
-    cameraPosition={[90, 50, 75]}
-    orbitTarget={[0, 0, 25]}
-    {...getUniformlyDistributedColors.lab(15)}
-  />
-</Three>
-
----
-
-<InteractiveColorSpace {...getUniformlyDistributedColors.lab(15)} />
-
----
-
-<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.hsl(2000)} />
-
----
-
-<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.rgb(2000)} />
-
----
-
-<InteractiveUMAPColorSpace {...getRandomlyDistributedColors.lab(2000)} />
-
----
-
-<InteractiveUMAPColorSpace
-  data={getRandomColorsFromAllSpaces(3000)}
-  dimensions={3}
-  exclude={["color", "r", "g", "b"]}
-  space="rgb"
-/>
