@@ -1,4 +1,4 @@
-export const accent = "#4ECEC9"
+export const accent = "#4ECEC9";
 
 export default {
   colors: {
@@ -10,4 +10,4 @@ export default {
       color: "#9ab0e5",
     },
   },
-}
+};

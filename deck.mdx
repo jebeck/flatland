@@ -3,8 +3,6 @@ import { Appear, Head, Horizontal, Image, Split } from "mdx-deck"
 
 import { CodeSurfer } from "code-surfer"
 import { nightOwl } from "@code-surfer/themes"
-import { ChromePicker } from "react-color"
-
 import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors"
 import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors"
 import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
@@ -22,7 +20,7 @@ import SphereVisitsFlatland, {
 import StitchFixLogo from "./components/StitchFixLogo"
 import SVGContainer from "./components/SVGContainer"
 import Three from "./components/LoadableThree"
-import { List, ScaledUpChromePicker, Subtitle, Title } from "./styled"
+import { List, Subtitle, Title } from "./styled"
 
 import equalEarth from "./images/Equal-Earth.png"
 import flatlandBook from "./images/Flatland-book.jpg"
@@ -424,12 +422,6 @@ const sphereVisitCamera = {
   <li style="color: #4ECEC9;">hsl(0.49, 57%, 56%)</li>
   <li style="color: #4ECEC9;">lab(76, -36, -8)</li>
 </List>
-
----
-
-<ScaledUpChromePicker>
-  <ChromePicker color="#4ECEC9" disableAlpha />
-</ScaledUpChromePicker>
 
 ---
 

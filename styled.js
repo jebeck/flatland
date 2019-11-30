@@ -40,9 +40,3 @@ export const List = styled.ul`
     padding: 1rem;
   }
 `;
-
-export const ScaledUpChromePicker = styled.div`
-  .chrome-picker {
-    transform: scale(3);
-  }
-`;
