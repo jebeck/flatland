@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
+import Typer from "./Typer";
 import { UMAPStatus } from "../styled";
 import { RenderWorker, useUMAP } from "react-flatland";
 
@@ -63,22 +64,25 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
   }, [coordinates]);
 
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
-      <canvas
-        height={height * devicePixelRatio}
-        id="offscreen-canvas"
-        style={{ height, width }}
-        width={width * devicePixelRatio}
-      />
-      {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
-      {computing && iteration ? (
-        <UMAPStatus>{`Iteration ${iteration + 1}${
-          nEpochs ? ` of ${nEpochs}` : ""
-        }`}</UMAPStatus>
-      ) : null}
-      {error ? (
-        <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
-      ) : null}
-    </div>
+    <>
+      <Typer />
+      <div style={{ height: "100vh", width: "100vw" }}>
+        <canvas
+          height={height * devicePixelRatio}
+          id="offscreen-canvas"
+          style={{ height, width }}
+          width={width * devicePixelRatio}
+        />
+        {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
+        {computing && iteration ? (
+          <UMAPStatus>{`Iteration ${iteration + 1}${
+            nEpochs ? ` of ${nEpochs}` : ""
+          }`}</UMAPStatus>
+        ) : null}
+        {error ? (
+          <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
+        ) : null}
+      </div>
+    </>
   );
 }

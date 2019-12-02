@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import Stats from "stats.js";
 
+import Typer from "./Typer";
 import { UMAPStatus } from "../styled";
 import { useUMAP } from "react-flatland";
 
@@ -56,22 +57,25 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
-      <canvas
-        height={height * devicePixelRatio}
-        ref={canvasEl}
-        style={{ height, width }}
-        width={width * devicePixelRatio}
-      />
-      {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
-      {computing && iteration ? (
-        <UMAPStatus>{`Iteration ${iteration + 1}${
-          nEpochs ? ` of ${nEpochs}` : ""
-        }`}</UMAPStatus>
-      ) : null}
-      {error ? (
-        <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
-      ) : null}
-    </div>
+    <>
+      <Typer />
+      <div style={{ height: "100vh", width: "100vw" }}>
+        <canvas
+          height={height * devicePixelRatio}
+          ref={canvasEl}
+          style={{ height, width }}
+          width={width * devicePixelRatio}
+        />
+        {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
+        {computing && iteration ? (
+          <UMAPStatus>{`Iteration ${iteration + 1}${
+            nEpochs ? ` of ${nEpochs}` : ""
+          }`}</UMAPStatus>
+        ) : null}
+        {error ? (
+          <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
+        ) : null}
+      </div>
+    </>
   );
 }
