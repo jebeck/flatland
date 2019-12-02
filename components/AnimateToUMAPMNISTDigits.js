@@ -5,8 +5,8 @@ import { schemeCategory10 } from "d3-scale-chromatic";
 import { Application, Text, TextStyle } from "pixi.js";
 import TWEEN from "@tweenjs/tween.js";
 
-import inputData from "../json/MNISTdigits2500.json";
-import umapData from "../json/MNISTdigits2500UMAP.json";
+import inputData from "../json/MNISTdigits5000.json";
+import umapData from "../json/MNISTdigits5000UMAP.json";
 
 const PADDING = 64;
 
@@ -19,7 +19,7 @@ const yScale = scaleLinear()
   .range([PADDING, window.innerHeight - PADDING]);
 
 const textStyle = new TextStyle({
-  fontSize: 32,
+  fontSize: 24,
   fontFamily: '"Gloria Hallelujah", sans-serif',
 });
 

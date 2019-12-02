@@ -40,3 +40,14 @@ export const List = styled.ul`
     padding: 1rem;
   }
 `;
+
+export const UMAPStatus = styled.div`
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  width: 100%;
+`;
