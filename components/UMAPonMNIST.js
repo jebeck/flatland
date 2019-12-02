@@ -9,7 +9,7 @@ import renderUMAPonMNIST from "../utils/renderUMAPonMNIST";
 const stats = new Stats();
 stats.showPanel(0);
 
-export default function UMAPonMNISTExamples({ data, iterate, worker }) {
+export default function UMAPonMNIST({ data, iterate, worker }) {
   const renderFn = useRef(null);
 
   useEffect(() => {
@@ -47,13 +47,21 @@ export default function UMAPonMNISTExamples({ data, iterate, worker }) {
     }
   }, [coordinates, renderFn]);
 
+  const { devicePixelRatio, height, width } = useMemo(() => {
+    return {
+      devicePixelRatio: window.devicePixelRatio,
+      height: window.innerHeight,
+      width: window.innerWidth,
+    };
+  }, []);
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       <canvas
-        height={window.innerHeight * window.devicePixelRatio}
+        height={height * devicePixelRatio}
         ref={canvasEl}
-        style={{ height: window.innerHeight, width: window.innerWidth }}
-        width={window.innerWidth * window.devicePixelRatio}
+        style={{ height, width }}
+        width={width * devicePixelRatio}
       />
       {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
       {computing && iteration ? (

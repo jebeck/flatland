@@ -1,6 +1,6 @@
 {
   "name": "flatland",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Flatland: a romance of data science in the browser",
   "private": true,
   "main": "deck.mdx",

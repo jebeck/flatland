@@ -20,7 +20,8 @@ import SphereVisitsFlatland, {
 import StitchFixLogo from "./components/StitchFixLogo"
 import SVGContainer from "./components/SVGContainer"
 import Three from "./components/LoadableThree"
-import UMAPonMNISTExamples from './components/LoadableUMAPonMNISTExamples'
+import UMAPonMNIST from './components/LoadableUMAPonMNIST'
+import UMAPonMNISTOffscreen from './components/LoadableUMAPonMNISTOffscreen'
 
 import data1000 from './json/MNISTdigits1000.json'
 import data2500 from './json/MNISTdigits2500.json'
@@ -381,7 +382,7 @@ const sphereVisitCamera = {
 
 ---
 
-<UMAPonMNISTExamples data={data1000} iterate={true} worker={false} />
+<UMAPonMNIST data={data1000} iterate worker={false} />
 
 ---
 
@@ -393,7 +394,7 @@ const sphereVisitCamera = {
 
 ---
 
-<UMAPonMNISTExamples data={data1000} iterate={true} />
+<UMAPonMNIST data={data1000} iterate />
 
 ---
 
@@ -405,7 +406,7 @@ const sphereVisitCamera = {
 
 ---
 
-<UMAPonMNISTExamples data={data2500} iterate={true} />
+<UMAPonMNIST data={data2500} iterate />
 
 ---
 
@@ -417,7 +418,7 @@ const sphereVisitCamera = {
 
 ---
 
-<UMAPonMNISTExamples data={data5000} iterate={true} />
+<UMAPonMNIST data={data5000} iterate />
 
 ---
 
@@ -468,4 +469,4 @@ const sphereVisitCamera = {
 
 ---
 
-# 👷🏾‍♀️ Workers in action! 👷🏻
+<UMAPonMNISTOffscreen data={data5000} iterate />
