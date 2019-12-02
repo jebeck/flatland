@@ -5,12 +5,22 @@ import { UMAPStatus } from "../styled";
 import { useUMAP } from "react-flatland";
 
 import renderUMAPonMNIST from "../utils/renderUMAPonMNIST";
+import RenderWorker from "../utils/render.worker";
 
 const stats = new Stats();
 stats.showPanel(0);
 
-export default function UMAPonMNISTExamples({ data, iterate, worker }) {
+export default function UMAPonMNISTExamples({
+  data,
+  iterate,
+  offscreen,
+  worker,
+}) {
   const renderFn = useRef(null);
+
+  const renderWorker = new RenderWorker();
+
+  renderWorker.postMessage({ msg: "Hi" });
 
   useEffect(() => {
     return () => {
