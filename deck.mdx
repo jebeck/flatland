@@ -20,6 +20,12 @@ import SphereVisitsFlatland, {
 import StitchFixLogo from "./components/StitchFixLogo"
 import SVGContainer from "./components/SVGContainer"
 import Three from "./components/LoadableThree"
+import UMAPonMNISTExamples from './components/LoadableUMAPonMNISTExamples'
+
+import data1000 from './json/MNISTdigits1000.json'
+import data2500 from './json/MNISTdigits2500.json'
+import data5000 from './json/MNISTdigits5000.json'
+
 import { List, Subtitle, Title } from "./styled"
 
 import equalEarth from "./images/Equal-Earth.png"
@@ -367,6 +373,54 @@ const sphereVisitCamera = {
 
 ---
 
+<Title>
+  <h1>demo 1️⃣</h1>
+  <h2>umap-js via the main thread</h2>
+  <h2>n = 1000, iterations = true</h2>
+</Title>
+
+---
+
+<UMAPonMNISTExamples data={data1000} iterate={true} worker={false} />
+
+---
+
+<Title>
+  <h1>demo 2️⃣</h1>
+  <h2>umap-js via a Worker</h2>
+  <h2>n = 1000, iterations = true</h2>
+</Title>
+
+---
+
+<UMAPonMNISTExamples data={data1000} iterate={true} />
+
+---
+
+<Title>
+  <h1>demo 2️⃣</h1>
+  <h2>umap-js via a Worker</h2>
+  <h2>n = 2500, iterations = true</h2>
+</Title>
+
+---
+
+<UMAPonMNISTExamples data={data2500} iterate={true} />
+
+---
+
+<Title>
+  <h1>demo 2️⃣</h1>
+  <h2>umap-js via a Worker</h2>
+  <h2>n = 5000, iterations = true</h2>
+</Title>
+
+---
+
+<UMAPonMNISTExamples data={data5000} iterate={true} />
+
+---
+
 # there's more! 😮
 
 <List fontSize="4.5rem">
@@ -415,6 +469,3 @@ const sphereVisitCamera = {
 ---
 
 # 👷🏾‍♀️ Workers in action! 👷🏻
-
----
-

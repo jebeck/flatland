@@ -9,7 +9,7 @@ import renderUMAPonMNIST from "../utils/renderUMAPonMNIST";
 const stats = new Stats();
 stats.showPanel(0);
 
-export default function UMAPonMNISTExamples({ data, iterate }) {
+export default function UMAPonMNISTExamples({ data, iterate, worker }) {
   const renderFn = useRef(null);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export default function UMAPonMNISTExamples({ data, iterate }) {
     debugLogs: false,
     exclude: useMemo(() => ["label"], []),
     iterate,
+    worker,
   });
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function UMAPonMNISTExamples({ data, iterate }) {
         width={window.innerWidth * window.devicePixelRatio}
       />
       {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
-      {iteration ? (
+      {computing && iteration ? (
         <UMAPStatus>{`Iteration ${iteration + 1}${
           nEpochs ? ` of ${nEpochs}` : ""
         }`}</UMAPStatus>
