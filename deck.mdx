@@ -40,9 +40,10 @@ import worldWideWeb from "./images/WorldWideWeb.png"
 
 import Browser from "./svg/Browser"
 import BrowserWithMainThread from "./svg/BrowserWithMainThread"
-import MainAndWorkers from "./svg/MainAndWorkers"
 import Flatland1 from "./svg/Flatland1"
 import Flatland2 from "./svg/Flatland2"
+import MainAndWorkers from "./svg/MainAndWorkers"
+import UMAPAndRenderWorkers from "./svg/UMAPAndRenderWorkers"
 
 import customTheme from "./theme"
 export const themes = [code, customTheme]
@@ -467,4 +468,38 @@ const sphereVisitCamera = {
 
 ---
 
+<SVGContainer>
+  <Browser>
+    <UMAPAndRenderWorkers />
+  </Browser>
+</SVGContainer>
+
+---
+
+<CodeSurfer theme={nightOwl}>
+
+  ```js file=./code/transfer-offscreen-canvas.js title="OffscreenCanvas (app-side)"
+  ```
+
+</CodeSurfer>
+
+---
+
+<CodeSurfer theme={nightOwl}>
+
+  ```js file=./code/render-worker.js title="OffscreenCanvas (worker-side)"
+  ```
+
+</CodeSurfer>
+
+---
+
 <UMAPonMNISTOffscreen data={data5000} iterate />
+
+---
+
+<Title>
+  <h2>Web Workers + OffscreenCanvas</h2>
+  <h2>(via transferable objects)</h2>
+  <h1>= escaping flatland</h1>
+</Title>
