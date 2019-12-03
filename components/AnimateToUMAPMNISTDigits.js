@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { extent } from "d3-array";
-import { scaleLinear, scaleOrdinal } from "d3-scale";
-import { schemeCategory10 } from "d3-scale-chromatic";
-import { Application, Text, TextStyle } from "pixi.js";
-import TWEEN from "@tweenjs/tween.js";
+import React, { useCallback, useEffect, useState } from 'react';
+import { extent } from 'd3-array';
+import { scaleLinear, scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+import { Application, Text, TextStyle } from 'pixi.js';
+import TWEEN from '@tweenjs/tween.js';
 
-import inputData from "../json/MNISTdigits5000.json";
-import umapData from "../json/MNISTdigits5000UMAP.json";
+import inputData from '../json/MNISTdigits5000.json';
+import umapData from '../json/MNISTdigits5000UMAP.json';
 
 const PADDING = 64;
 
@@ -95,7 +95,7 @@ export default function AnimateToUMAPMNISTDigits() {
 
   if (xScale.range()[1] !== 1) {
     return (
-      <div style={{ height: "100vh", width: "100vw" }}>
+      <div style={{ height: '100vh', width: '100vw' }}>
         <canvas
           height={window.innerHeight * window.devicePixelRatio}
           ref={canvasEl}

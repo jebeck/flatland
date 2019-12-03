@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function BrowserWithMainThread() {
   return (
@@ -95,11 +95,11 @@ export default function BrowserWithMainThread() {
             transform="translate(984.972 520.848)"
           >
             <tspan x="-103.35" y="-156.852">
-              the{" "}
-            </tspan>{" "}
+              the{' '}
+            </tspan>{' '}
             <tspan x="-151.725" y="39.148">
-              main{" "}
-            </tspan>{" "}
+              main{' '}
+            </tspan>{' '}
             <tspan x="-209.025" y="235.148">
               thread
             </tspan>

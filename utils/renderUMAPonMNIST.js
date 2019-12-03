@@ -1,7 +1,7 @@
-import { extent } from "d3-array";
-import { scaleLinear, scaleOrdinal } from "d3-scale";
-import { schemeCategory10 } from "d3-scale-chromatic";
-import { Application, Text, TextStyle } from "pixi.js";
+import { extent } from 'd3-array';
+import { scaleLinear, scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+import { Application, Text, TextStyle } from 'pixi.js';
 
 const textStyle = new TextStyle({
   fontSize: 24,

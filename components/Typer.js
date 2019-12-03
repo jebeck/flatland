@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function Typer() {
   const inputEl = useRef(null);
-  const [text, setText] = useState("foobar");
+  const [text, setText] = useState('foobar');
 
   useEffect(() => {
     if (inputEl.current) {
@@ -13,12 +13,12 @@ export default function Typer() {
   return (
     <div
       style={{
-        alignItems: "flex-end",
-        display: "flex",
-        flexDirection: "column",
-        fontSize: "4rem",
-        padding: "1rem",
-        position: "absolute",
+        alignItems: 'flex-end',
+        display: 'flex',
+        flexDirection: 'column',
+        fontSize: '4rem',
+        padding: '1rem',
+        position: 'absolute',
         right: 0,
         top: 0,
       }}
@@ -28,9 +28,9 @@ export default function Typer() {
         onChange={e => setText(e.target.value.slice(-5))}
         ref={inputEl}
         style={{
-          fontFamily: "Source Code Pro",
-          fontSize: "4rem",
-          maxWidth: "16rem",
+          fontFamily: 'Source Code Pro',
+          fontSize: '4rem',
+          maxWidth: '16rem',
         }}
         type="text"
         value={text}

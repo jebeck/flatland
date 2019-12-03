@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from 'react';
 
-import Typer from "./Typer";
-import { UMAPStatus } from "../styled";
-import { RenderWorker, useUMAP } from "react-flatland";
+import Typer from './Typer';
+import { UMAPStatus } from '../styled';
+import { RenderWorker, useUMAP } from 'react-flatland';
 
 export default function UMAPonMNISTOffscreen({ data, iterate }) {
   const { devicePixelRatio, height, width } = useMemo(() => {
@@ -16,21 +16,21 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
   const renderWorkerRef = useRef(null);
 
   useEffect(() => {
-    if (document.querySelector("#offscreen-canvas")) {
+    if (document.querySelector('#offscreen-canvas')) {
       const renderWorker = new RenderWorker();
       renderWorkerRef.current = renderWorker;
       const offscreenCanvas = document
-        .querySelector("#offscreen-canvas")
+        .querySelector('#offscreen-canvas')
         .transferControlToOffscreen();
       renderWorker.postMessage(
         {
-          type: "init",
+          type: 'init',
           payload: {
             canvas: offscreenCanvas,
             data,
             debugLogs: true,
             devicePixelRatio,
-            exclude: ["label"],
+            exclude: ['label'],
             height,
             iterate,
             width,
@@ -47,7 +47,7 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
   const { computing, coordinates, error, iteration, nEpochs } = useUMAP({
     data,
     debugLogs: false,
-    exclude: useMemo(() => ["label"], []),
+    exclude: useMemo(() => ['label'], []),
     iterate,
   });
 
@@ -55,7 +55,7 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
     if (renderWorkerRef.current && coordinates) {
       renderWorkerRef.current.postMessage(
         {
-          type: "compute",
+          type: 'compute',
           payload: { coordinates },
         },
         [coordinates]
@@ -66,7 +66,7 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
   return (
     <>
       <Typer />
-      <div style={{ height: "100vh", width: "100vw" }}>
+      <div style={{ height: '100vh', width: '100vw' }}>
         <canvas
           height={height * devicePixelRatio}
           id="offscreen-canvas"
@@ -76,11 +76,11 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
         {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
         {computing && iteration ? (
           <UMAPStatus>{`Iteration ${iteration + 1}${
-            nEpochs ? ` of ${nEpochs}` : ""
+            nEpochs ? ` of ${nEpochs}` : ''
           }`}</UMAPStatus>
         ) : null}
         {error ? (
-          <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
+          <UMAPStatus>{error.message || 'Unknown error 😭'}</UMAPStatus>
         ) : null}
       </div>
     </>

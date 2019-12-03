@@ -1,24 +1,24 @@
-import React, { useEffect, useRef, useState } from "react"
-import PropTypes from "prop-types"
-import { animated, useSprings } from "react-spring/three"
+import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { animated, useSprings } from 'react-spring/three';
 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {
   extend,
   useFrame,
   useRender,
   useResource,
   useThree,
-} from "react-three-fiber"
+} from 'react-three-fiber';
 
-import getColorXYZPosition from "../utils/getColorXYZPosition"
-import getColorXYZInAnotherSpace from "../utils/getColorXYZInAnotherSpace"
-import { SPACES } from "../utils/constants"
+import getColorXYZPosition from '../utils/getColorXYZPosition';
+import getColorXYZInAnotherSpace from '../utils/getColorXYZInAnotherSpace';
+import { SPACES } from '../utils/constants';
 
-extend({ OrbitControls })
+extend({ OrbitControls });
 
-const startingCameraPosition = [75, 75, 75]
-const startingFocalPoint = [0, 0, 0]
+const startingCameraPosition = [75, 75, 75];
+const startingFocalPoint = [0, 0, 0];
 
 function ColorSphere({ color, geometry, position }) {
   return (
@@ -30,7 +30,7 @@ function ColorSphere({ color, geometry, position }) {
         // emissiveIntensity={0.5}
       />
     </animated.mesh>
-  )
+  );
 }
 
 ColorSphere.propTypes = {
@@ -38,15 +38,15 @@ ColorSphere.propTypes = {
   /** because is a ref, will be undefined on first render */
   geometry: PropTypes.object,
   position: PropTypes.object.isRequired,
-}
+};
 
 export function CameraControls({ autoRotate, target }) {
-  const { camera } = useThree()
-  const controls = useRef()
+  const { camera } = useThree();
+  const controls = useRef();
 
-  const [canvasEl] = useState(document.getElementsByTagName("canvas")[0])
+  const [canvasEl] = useState(document.getElementsByTagName('canvas')[0]);
 
-  useRender(() => controls.current && controls.current.update())
+  useRender(() => controls.current && controls.current.update());
 
   return (
     <orbitControls
@@ -56,19 +56,19 @@ export function CameraControls({ autoRotate, target }) {
       ref={controls}
       target={target || [0, 0, 0]}
     />
-  )
+  );
 }
 
 CameraControls.propTypes = {
   autoRotate: PropTypes.bool.isRequired,
-}
+};
 
 export function Spotlight() {
-  const spotLightRef = useRef()
-  const { camera } = useThree()
-  useFrame(() => spotLightRef.current.position.copy(camera.position))
+  const spotLightRef = useRef();
+  const { camera } = useThree();
+  useFrame(() => spotLightRef.current.position.copy(camera.position));
 
-  return <spotLight position={startingCameraPosition} ref={spotLightRef} />
+  return <spotLight position={startingCameraPosition} ref={spotLightRef} />;
 }
 
 export default function ColorSpace({
@@ -80,13 +80,13 @@ export default function ColorSpace({
   spaceRadius,
   sphereRadius,
 }) {
-  const [geometryRef, geometry] = useResource()
-  const { camera } = useThree()
+  const [geometryRef, geometry] = useResource();
+  const { camera } = useThree();
 
   const [positions, setPositions] = useSprings(data.length, i => {
-    const { x, y, z } = getColorXYZPosition[space](spaceRadius, data[i])
-    return { meshPosition: [x, y, z] }
-  })
+    const { x, y, z } = getColorXYZPosition[space](spaceRadius, data[i]);
+    return { meshPosition: [x, y, z] };
+  });
 
   useEffect(() => {
     if (animateToSpace) {
@@ -95,16 +95,16 @@ export default function ColorSpace({
           animateToSpace,
           d: data[i],
           spaceRadius,
-        })
-        return { meshPosition: [x, y, z] }
-      })
+        });
+        return { meshPosition: [x, y, z] };
+      });
     }
-  }, [animateToSpace, data, setPositions, spaceRadius])
+  }, [animateToSpace, data, setPositions, spaceRadius]);
 
   useEffect(() => {
-    camera.position.set(...(cameraPosition || startingCameraPosition))
-    camera.lookAt(...startingFocalPoint)
-  }, [camera, cameraPosition])
+    camera.position.set(...(cameraPosition || startingCameraPosition));
+    camera.lookAt(...startingFocalPoint);
+  }, [camera, cameraPosition]);
 
   return (
     <group>
@@ -119,16 +119,16 @@ export default function ColorSpace({
             key={`${i}-${d.color}`}
             position={positions[i].meshPosition}
           />
-        )
+        );
       })}
     </group>
-  )
+  );
 }
 
 ColorSpace.defaultProps = {
   spaceRadius: 50,
   sphereRadius: 2,
-}
+};
 
 ColorSpace.propTypes = {
   animateToSpace: PropTypes.oneOf(SPACES),
@@ -138,4 +138,4 @@ ColorSpace.propTypes = {
   space: PropTypes.oneOf(SPACES).isRequired,
   spaceRadius: PropTypes.number.isRequired,
   sphereRadius: PropTypes.number,
-}
+};

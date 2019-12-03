@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const textShadow = keyframes`
   to {
@@ -29,7 +29,7 @@ export const Subtitle = styled.div`
 `;
 
 export const List = styled.ul`
-  font-size: ${props => props.fontSize || "6rem"};
+  font-size: ${props => props.fontSize || '6rem'};
   font-weight: bold;
   list-style-type: none;
   margin-top: 0;

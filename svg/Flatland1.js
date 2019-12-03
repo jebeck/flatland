@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import FlatlandShadowBorder from "./FlatlandShadowBorder";
+import FlatlandShadowBorder from './FlatlandShadowBorder';
 
 export const strokeProps = {
-  fill: "black",
-  stroke: "black",
+  fill: 'black',
+  stroke: 'black',
   strokeWidth: 8,
-  strokeLinecap: "round",
-  strokeLinejoin: "round",
-  vectorEffect: "non-scaling-stroke",
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  vectorEffect: 'non-scaling-stroke',
 };
 
 export default function Flatland() {

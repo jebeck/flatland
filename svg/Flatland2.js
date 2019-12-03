@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import FlatlandShadowBorder from "./FlatlandShadowBorder";
-import { strokeProps } from "./Flatland1";
+import FlatlandShadowBorder from './FlatlandShadowBorder';
+import { strokeProps } from './Flatland1';
 
 export default function Flatland() {
   return (

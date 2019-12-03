@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { animated, useSpring } from "react-spring/three";
-import { config } from "react-spring";
-import * as THREE from "three";
-import { useResource, useThree } from "react-three-fiber";
+import { animated, useSpring } from 'react-spring/three';
+import { config } from 'react-spring';
+import * as THREE from 'three';
+import { useResource, useThree } from 'react-three-fiber';
 
-import { bgColor } from "./SVGContainer";
-import { CameraControls, Spotlight, startingFocalPoint } from "./ColorSpace";
+import { bgColor } from './SVGContainer';
+import { CameraControls, Spotlight, startingFocalPoint } from './ColorSpace';
 
 export const startingCameraPosition = [0, 0, -625];
 const endingCameraPosition = [0, -625, -625];

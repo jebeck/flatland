@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import Stats from "stats.js";
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import Stats from 'stats.js';
 
-import Typer from "./Typer";
-import { UMAPStatus } from "../styled";
-import { useUMAP } from "react-flatland";
+import Typer from './Typer';
+import { UMAPStatus } from '../styled';
+import { useUMAP } from 'react-flatland';
 
-import renderUMAPonMNIST from "../utils/renderUMAPonMNIST";
+import renderUMAPonMNIST from '../utils/renderUMAPonMNIST';
 
 const stats = new Stats();
 stats.showPanel(0);
@@ -22,7 +22,7 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
   const canvasEl = useCallback(
     node => {
       if (node) {
-        stats.dom.style.transform = "scale(4) translate(40%,42.5%)";
+        stats.dom.style.transform = 'scale(4) translate(40%,42.5%)';
         document.body.appendChild(stats.dom);
         renderFn.current = renderUMAPonMNIST({
           canvas: node,
@@ -37,7 +37,7 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
   const { computing, coordinates, error, iteration, nEpochs } = useUMAP({
     data,
     debugLogs: false,
-    exclude: useMemo(() => ["label"], []),
+    exclude: useMemo(() => ['label'], []),
     iterate,
     worker,
   });
@@ -59,7 +59,7 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
   return (
     <>
       <Typer />
-      <div style={{ height: "100vh", width: "100vw" }}>
+      <div style={{ height: '100vh', width: '100vw' }}>
         <canvas
           height={height * devicePixelRatio}
           ref={canvasEl}
@@ -69,11 +69,11 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
         {computing && !iteration ? <UMAPStatus>Computing...</UMAPStatus> : null}
         {computing && iteration ? (
           <UMAPStatus>{`Iteration ${iteration + 1}${
-            nEpochs ? ` of ${nEpochs}` : ""
+            nEpochs ? ` of ${nEpochs}` : ''
           }`}</UMAPStatus>
         ) : null}
         {error ? (
-          <UMAPStatus>{error.message || "Unknown error 😭"}</UMAPStatus>
+          <UMAPStatus>{error.message || 'Unknown error 😭'}</UMAPStatus>
         ) : null}
       </div>
     </>

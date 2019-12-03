@@ -1,7 +1,7 @@
-import React from "react";
-import { range } from "d3-array";
+import React from 'react';
+import { range } from 'd3-array';
 
-import singleDigit from "../images/MNIST_eight.png";
+import singleDigit from '../images/MNIST_eight.png';
 
 const N = 10;
 
@@ -13,12 +13,12 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
   return (
     <div
       style={{
-        alignItems: "center",
-        backgroundColor: "ghostwhite",
-        display: "flex",
-        flexDirection: "column",
+        alignItems: 'center',
+        backgroundColor: 'ghostwhite',
+        display: 'flex',
+        flexDirection: 'column',
         height: highlight ? SIZE / 1.75 + N : SIZE + 56,
-        justifyContent: "center",
+        justifyContent: 'center',
         width: highlight ? SIZE / 1.75 + N : SIZE + 56,
       }}
     >

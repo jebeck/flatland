@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-export const bgColor = "#4A4659";
+export const bgColor = '#4A4659';
 
 export default function SVGContainer({ children }) {
   return (
     <div
       style={{
-        marginTop: "2vh",
-        maxHeight: "94vh",
-        minHeight: "94vh",
-        maxWidth: "96vw",
-        minWidth: "96vw",
+        marginTop: '2vh',
+        maxHeight: '94vh',
+        minHeight: '94vh',
+        maxWidth: '96vw',
+        minWidth: '96vw',
       }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: '100%', width: '100%' }}
         viewBox="0 0 1920 1080"
       >
         <defs>

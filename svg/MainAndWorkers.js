@@ -1,9 +1,9 @@
-import _ from "lodash";
-import React from "react";
+import _ from 'lodash';
+import React from 'react';
 
-import { strokeProps } from "./Flatland1";
+import { strokeProps } from './Flatland1';
 
-const WORKERS = ["👷🏿", "👷🏽‍♀️", "👷🏻‍♀️", "👷🏼", "👷‍♀️"];
+const WORKERS = ['👷🏿', '👷🏽‍♀️', '👷🏻‍♀️', '👷🏼', '👷‍♀️'];
 
 const COORDS = [
   [1600, 800],
@@ -55,11 +55,11 @@ export default function MainAndWorkers() {
             transform="translate(984.972 520.848)"
           >
             <tspan x="-103.35" y="-156.852">
-              the{" "}
-            </tspan>{" "}
+              the{' '}
+            </tspan>{' '}
             <tspan x="-151.725" y="39.148">
-              main{" "}
-            </tspan>{" "}
+              main{' '}
+            </tspan>{' '}
             <tspan x="-209.025" y="235.148">
               thread
             </tspan>
@@ -74,7 +74,7 @@ export default function MainAndWorkers() {
               cy={COORDS[i][1]}
               fill="#4ECEC9"
               r={RADII[i]}
-              {..._.omit(strokeProps, "fill")}
+              {..._.omit(strokeProps, 'fill')}
             />
             <text
               alignmentBaseline="central"

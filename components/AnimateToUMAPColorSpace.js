@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from 'react';
 
-import LoadableUMAPColorSpace from "./LoadableUMAPColorSpace";
-import LoadableThree from "./LoadableThree";
+import LoadableUMAPColorSpace from './LoadableUMAPColorSpace';
+import LoadableThree from './LoadableThree';
 
-import hsl from "../json/uniformHslUMAP.json";
-import rgb from "../json/uniformRgbUMAP.json";
+import hsl from '../json/uniformHslUMAP.json';
+import rgb from '../json/uniformRgbUMAP.json';
 
 const coordinates = { hsl, rgb };
 
@@ -29,7 +29,7 @@ export default function InteractiveUMAPColorSpace(props) {
   }, [go]);
 
   return (
-    <div onClick={cb} style={{ height: "100vh", width: "100vw" }}>
+    <div onClick={cb} style={{ height: '100vh', width: '100vw' }}>
       <LoadableThree>
         <LoadableUMAPColorSpace
           animateToCoordinates={coords.buffer}
