@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import Typer from './Typer';
-import { UMAPStatus } from '../styled';
+import { UMAPButton, UMAPStatus } from '../styled';
 import { RenderWorker, useUMAP } from 'react-flatland';
 
-export default function UMAPonMNISTOffscreen({ data, iterate }) {
+function UMAPonMNISTOffscreen({ data, iterate }) {
   const { devicePixelRatio, height, width } = useMemo(() => {
     return {
       devicePixelRatio: window.devicePixelRatio,
@@ -84,5 +84,15 @@ export default function UMAPonMNISTOffscreen({ data, iterate }) {
         ) : null}
       </div>
     </>
+  );
+}
+
+export default function ButtonWrapper(props) {
+  const [go, setGo] = useState(false);
+
+  return go ? (
+    <UMAPonMNISTOffscreen {...props} />
+  ) : (
+    <UMAPButton onClick={() => setGo(true)}>Let's UMAP!</UMAPButton>
   );
 }

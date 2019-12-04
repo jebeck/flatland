@@ -20,14 +20,6 @@ export default function InteractiveUMAPColorSpace(props) {
     setGo(true);
   }, [setGo]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (!go) {
-        setGo(true);
-      }
-    }, 5000);
-  }, [go]);
-
   return (
     <div onClick={cb} style={{ height: '100vh', width: '100vw' }}>
       <LoadableThree>

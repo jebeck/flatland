@@ -59,3 +59,11 @@ export const AbsoluteTitle = styled.div`
   position: absolute;
   bottom: 2vh;
 `;
+
+export const UMAPButton = styled.button`
+  background-color: #fa9499;
+  color: #261f41;
+  font-size: 4rem;
+  font-weight: bold;
+  padding: 1rem 1.25rem;
+`;

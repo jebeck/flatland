@@ -1,8 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import Stats from 'stats.js';
 
 import Typer from './Typer';
-import { UMAPStatus } from '../styled';
+import { UMAPButton, UMAPStatus } from '../styled';
 import { useUMAP } from 'react-flatland';
 
 import renderUMAPonMNIST from '../utils/renderUMAPonMNIST';
@@ -10,7 +16,7 @@ import renderUMAPonMNIST from '../utils/renderUMAPonMNIST';
 const stats = new Stats();
 stats.showPanel(0);
 
-export default function UMAPonMNIST({ data, iterate, worker }) {
+function UMAPonMNIST({ data, iterate, worker }) {
   const renderFn = useRef(null);
 
   useEffect(() => {
@@ -77,5 +83,15 @@ export default function UMAPonMNIST({ data, iterate, worker }) {
         ) : null}
       </div>
     </>
+  );
+}
+
+export default function ButtonWrapper(props) {
+  const [go, setGo] = useState(false);
+
+  return go ? (
+    <UMAPonMNIST {...props} />
+  ) : (
+    <UMAPButton onClick={() => setGo(true)}>Let's UMAP!</UMAPButton>
   );
 }
