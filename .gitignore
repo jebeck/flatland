@@ -2,3 +2,4 @@
 .yalc/
 dist/
 node_modules/
+web/
