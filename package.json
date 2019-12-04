@@ -5,7 +5,7 @@
   "private": true,
   "main": "deck.mdx",
   "scripts": {
-    "build": "rimraf dist/ && mdx-deck build --basepath='/flatland' deck.mdx",
+    "build": "rimraf public/ && mdx-deck build deck.mdx",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
