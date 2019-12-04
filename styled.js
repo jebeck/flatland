@@ -51,3 +51,11 @@ export const UMAPStatus = styled.div`
   top: 45%;
   width: 100%;
 `;
+
+export const AbsoluteTitle = styled.div`
+  font-size: 2rem;
+  font-weight: bold;
+  right: 2vw;
+  position: absolute;
+  bottom: 2vh;
+`;

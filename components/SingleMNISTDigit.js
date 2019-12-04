@@ -1,8 +1,6 @@
 import React from 'react';
 import { range } from 'd3-array';
 
-import singleDigit from '../images/MNIST_eight.png';
-
 const N = 10;
 
 const SIZE = N * 75;
@@ -27,7 +25,11 @@ export default function SingleMNISTDigit({ coordinates, highlight, overlay }) {
         viewBox={`0 0 ${VIEW_SIZE} ${VIEW_SIZE}`}
         width={highlight ? SIZE / 1.75 : SIZE}
       >
-        <image xlinkHref={singleDigit} height="100%" width="100%" />
+        <image
+          xlinkHref="./images/MNIST_eight.png"
+          height="100%"
+          width="100%"
+        />
         {overlay ? (
           <>
             <rect

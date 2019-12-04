@@ -5,7 +5,8 @@
   "private": true,
   "main": "deck.mdx",
   "scripts": {
-    "build": "rimraf public/ && mdx-deck build deck.mdx",
+    "copy": "cp -r images/ dist/images/ && cp -r videos/ dist/videos/",
+    "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
@@ -23,24 +24,24 @@
     "yalc": "^1.0.0-pre.34"
   },
   "dependencies": {
-    "@code-surfer/themes": "^3.0.0-beta.0",
     "@tweenjs/tween.js": "^18.4.2",
-    "code-surfer": "^3.0.0-beta.1",
+    "code-surfer": "^0.5.5",
     "d3-array": "^2.4.0",
     "d3-color": "^1.4.0",
     "d3-scale": "^3.2.0",
     "d3-scale-chromatic": "^1.5.0",
     "gsap": "^3.0.1",
     "lodash": "^4.17.15",
-    "lottie-web": "^5.5.9",
-    "mdx-deck": "^3.0.13",
+    "mdx-deck": "^2.5.1",
     "pixi.js": "^5.2.0",
+    "raw-loader": "^3.1.0",
     "react-flatland": "file:.yalc/react-flatland",
     "react-loadable": "^5.5.0",
     "react-spring": "^8.0.27",
     "react-three-fiber": "^3.0.14",
     "stats.js": "^0.17.0",
     "styled-components": "^4.4.1",
+    "theme-ui": "^0.2.49",
     "three": "^0.110.0",
     "umap-js": "^1.3.1"
   },

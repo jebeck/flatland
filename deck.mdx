@@ -1,8 +1,10 @@
 import { code } from "@mdx-deck/themes"
-import { Appear, Head, Horizontal, Image, Split } from "mdx-deck"
+import { Appear, Head, Image } from "@mdx-deck/components"
+import { Horizontal, Split } from "@mdx-deck/layouts"
 
-import { CodeSurfer } from "code-surfer"
-import { nightOwl } from "@code-surfer/themes"
+import CodeSurfer from "code-surfer"
+import oceanicNext from "prism-react-renderer/themes/oceanicNext"
+
 import getRandomlyDistributedColors from "./utils/getRandomlyDistributedColors"
 import getUniformlyDistributedColors from "./utils/getUniformlyDistributedColors"
 import getRandomColorsFromAllSpaces from "./utils/getRandomColorsFromAllSpaces"
@@ -25,18 +27,7 @@ import data1000 from './json/MNISTdigits1000.json'
 import data2500 from './json/MNISTdigits2500.json'
 import data5000 from './json/MNISTdigits5000.json'
 
-import { List, Subtitle, Title } from "./styled"
-
-import equalEarth from "./images/Equal-Earth.png"
-import flatlandBook from "./images/Flatland-book.jpg"
-import flatlandTitleAuthor from "./images/Flatland-title-author.png"
-import mercator from "./images/Mercator.png"
-import mnistDigits from './images/MNIST_digits.png'
-import offscreenCanvas from "./images/OffscreenCanvas.png"
-import tensorFlowJs from "./images/TensorFlowjs.png"
-import umapJs from "./images/umap-js.png"
-import watermansButterfly from "./images/Watermans-Butterfly.png"
-import worldWideWeb from "./images/WorldWideWeb.png"
+import { AbsoluteTitle, List, Subtitle, Title } from "./styled"
 
 import Browser from "./svg/Browser"
 import BrowserWithMainThread from "./svg/BrowserWithMainThread"
@@ -96,25 +87,7 @@ const sphereVisitCamera = {
 
 ---
 
-<img src={mercator} style="max-height: 90vh;" />
-<Credit
-  asset="Mercator Projection"
-  author="Mike Bostock"
-  link="https://observablehq.com/@d3/mercator?collection=@d3/d3-geo"
-/>
-
----
-
-<img src={equalEarth} style="max-width: 90vw;" />
-<Credit
-  asset="Equal Earth Projection"
-  author="Mike Bostock"
-  link="https://observablehq.com/@d3/equal-earth?collection=@d3/d3-geo"
-/>
-
----
-
-<img src={watermansButterfly} style="max-height: 90vh;" />
+<img src='./images/Watermans-Butterfly.png' style={{maxHeight: '90vh'}} />
 <Credit
   asset="Waterman's Butterfly Map Projection"
   author="Mike Bostock"
@@ -152,7 +125,7 @@ const sphereVisitCamera = {
 
 ---
 
-<img src={mnistDigits} style={{opacity: '12.5%', position: 'absolute', top: '5vh', height: '90vh', maxWidth: '90vw'}}/>
+<img src='./images/MNIST_digits.png' style={{height: '90vh', left: '5vw', opacity: '12.5%', position: 'absolute', top: '5vh', maxWidth: '90vw'}}/>
 <Title>
   <h1>the MNIST digits dataset</h1>
 </Title>
@@ -181,12 +154,12 @@ const sphereVisitCamera = {
 
 <Split>
   <SingleMNISTDigit coordinates highlight={[2,2]} overlay />
-  <div style={{ padding: '1rem' }}>
+  <div style={{ padding: '0.5rem' }}>
 
   |       | ... | 2,2   | 3,2 |
   | ----- | --- | ----- | --- |
-  | img_0 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 0.82573   |
-  | img_1 | ... | ...   | ... |
+  | d1 | ... | <span style={{color: 'white', fontWeight: 'bold'}}>0</span> | 0.825  |
+  | d2 | ... | ...   | ... |
 
   </div>
 </Split>
@@ -195,23 +168,24 @@ const sphereVisitCamera = {
 
 <Split>
   <SingleMNISTDigit coordinates highlight={[3,2]} overlay />
-  <div style={{ padding: '1rem' }}>
+  <div style={{ padding: '0.5rem' }}>
 
-  |       | ... | 2,2 | 3,2   |
-  | ----- | --- | --- | ----- |
-  | img_0 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>0.82573</span> |
-  | img_1 | ... | ... | ...   |
+  |       | ... | 2,2   | 3,2 |
+  | ----- | --- | ----- | --- |
+  | d1 | ... | 0   | <span style={{color: 'white', fontWeight: 'bold'}}>0.825</span> |
+  | d2 | ... | ...   | ... |
 
   </div>
 </Split>
 
 ---
 
+<AbsoluteTitle>UMAP of 5000 MNIST digits</AbsoluteTitle>
 <AnimateToUMAPMNISTDigits/>
 
 ---
 
-<img src={flatlandBook} style="max-width: 90vw;" />
+<img src='./images/Flatland-book.jpg' style={{maxWidth: '90vw'}} />
 
 ---
 
@@ -219,7 +193,7 @@ const sphereVisitCamera = {
 
 ---
 
-<img src={flatlandTitleAuthor} style="max-width: 90vw;" />
+<img src='./images/Flatland-title-author.png' style={{maxWidth: '90vw'}} />
 
 ---
 
@@ -247,15 +221,15 @@ const sphereVisitCamera = {
 
 ---
 
-<img src={worldWideWeb} style="max-height: 90vh;" />
+<img src='./images/WorldWideWeb.png' style={{maxHeight: '90vh'}} />
 
 ---
 
-<img src={tensorFlowJs} style="max-height: 90vh;" />
+<img src='./images/TensorFlowjs.png' style={{maxHeight: '90vh'}} />
 
 ---
 
-<img src={umapJs} style="max-height: 90vh;" />
+<img src='./images/umap-js.png' style={{maxHeight: '90vh'}} />
 
 ---
 
@@ -343,21 +317,19 @@ const sphereVisitCamera = {
 
 ---
 
-<CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/worker-template.js title="worker template"
-  ```
-
-</CodeSurfer>
+<AbsoluteTitle>Worker template</AbsoluteTitle>
+<CodeSurfer
+  code={require('!raw-loader!./code/worker-template.js').default}
+  theme={oceanicNext}
+/>
 
 ---
 
-<CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/app-template.js title="app-side template"
-  ```
-
-</CodeSurfer>
+<AbsoluteTitle>app-side template</AbsoluteTitle>
+<CodeSurfer
+  code={require('!raw-loader!./code/app-template.js').default}
+  theme={oceanicNext}
+/>
 
 ---
 
@@ -381,6 +353,7 @@ const sphereVisitCamera = {
 
 ---
 
+<AbsoluteTitle>UMAP in main</AbsoluteTitle>
 <UMAPonMNIST data={data1000} iterate worker={false} />
 
 ---
@@ -393,30 +366,33 @@ const sphereVisitCamera = {
 
 ---
 
+<AbsoluteTitle>UMAP in Worker, n = 1000</AbsoluteTitle>
 <UMAPonMNIST data={data1000} iterate />
 
 ---
 
 <Title>
-  <h1>demo 2️⃣</h1>
+  <h1>demo 3️⃣</h1>
   <h2>umap-js via a Worker</h2>
   <h2>n = 2500, iterations = true</h2>
 </Title>
 
 ---
 
+<AbsoluteTitle>UMAP in Worker, n = 2500</AbsoluteTitle>
 <UMAPonMNIST data={data2500} iterate />
 
 ---
 
 <Title>
-  <h1>demo 2️⃣</h1>
+  <h1>demo 4️⃣</h1>
   <h2>umap-js via a Worker</h2>
   <h2>n = 5000, iterations = true</h2>
 </Title>
 
 ---
 
+<AbsoluteTitle>UMAP in Worker, n = 5000</AbsoluteTitle>
 <UMAPonMNIST data={data5000} iterate />
 
 ---
@@ -455,16 +431,15 @@ const sphereVisitCamera = {
 
 ---
 
-<CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/transferable-objects.js title="transferable objects"
-  ```
-
-</CodeSurfer>
+<AbsoluteTitle>transferable objects</AbsoluteTitle>
+<CodeSurfer
+  code={require('!raw-loader!./code/transferable-objects.js').default}
+  theme={oceanicNext}
+/>
 
 ---
 
-<img src={offscreenCanvas} style="max-height: 90vh;" />
+<img src='./images/OffscreenCanvas.png' style={{maxHeight: '90vh'}} />
 
 ---
 
@@ -476,24 +451,32 @@ const sphereVisitCamera = {
 
 ---
 
-<CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/transfer-offscreen-canvas.js title="OffscreenCanvas (app-side)"
-  ```
-
-</CodeSurfer>
-
----
-
-<CodeSurfer theme={nightOwl}>
-
-  ```js file=./code/render-worker.js title="OffscreenCanvas (worker-side)"
-  ```
-
-</CodeSurfer>
+<AbsoluteTitle>OffscreenCanvas (app-side)</AbsoluteTitle>
+<CodeSurfer
+  code={require('!raw-loader!./code/transfer-offscreen-canvas.js').default}
+  theme={oceanicNext}
+/>
 
 ---
 
+<AbsoluteTitle>OffscreenCanvas (Worker-side)</AbsoluteTitle>
+<CodeSurfer
+  code={require('!raw-loader!./code/render-worker.js').default}
+  theme={oceanicNext}
+/>
+
+---
+
+<Title>
+  <h1>demo 5️⃣</h1>
+  <h2>umap-js via 2 Workers & OffscreenCanvas</h2>
+  <h3>compute Worker, render Worker</h3>
+  <h2>n = 1000, iterations = true</h2>
+</Title>
+
+---
+
+<AbsoluteTitle>UMAP & render in Workers, n = 5000</AbsoluteTitle>
 <UMAPonMNISTOffscreen data={data5000} iterate />
 
 ---
