@@ -6,7 +6,8 @@
   "main": "deck.mdx",
   "scripts": {
     "copy": "cp -r images/ dist/images/",
-    "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
+    "build": "rimraf dist/ && mdx-deck build --basepath='/flatland' deck.mdx && npm run copy",
+    "build-local": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },
   "repository": {
