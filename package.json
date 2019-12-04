@@ -5,7 +5,7 @@
   "private": true,
   "main": "deck.mdx",
   "scripts": {
-    "copy": "cp -r images/ dist/images/ && cp -r videos/ dist/videos/",
+    "copy": "cp -r images/ dist/images/",
     "build": "rimraf dist/ && mdx-deck build deck.mdx && npm run copy",
     "start": "mdx-deck deck.mdx"
   },

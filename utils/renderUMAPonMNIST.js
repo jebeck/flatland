@@ -8,7 +8,7 @@ const textStyle = new TextStyle({
   fontFamily: '"Gloria Hallelujah", sans-serif',
 });
 
-const PADDING = 64;
+const PADDING = 100;
 
 const colorScale = scaleOrdinal(schemeCategory10);
 
