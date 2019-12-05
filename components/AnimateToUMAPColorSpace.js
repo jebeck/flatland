@@ -8,7 +8,7 @@ import rgb from '../json/uniformRgbUMAP.json';
 
 const coordinates = { hsl, rgb };
 
-export default function InteractiveUMAPColorSpace(props) {
+export default function AnimateToUMAPColorSpace(props) {
   const { space } = props;
   const [go, setGo] = useState(false);
 

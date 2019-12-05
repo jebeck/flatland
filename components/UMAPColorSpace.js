@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
-import { animated, useSprings } from "react-spring/three";
-import { range } from "d3-array";
-import { scaleLinear } from "d3-scale";
+import React, { useEffect, useMemo, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { animated, useSpring, useSprings } from 'react-spring/three';
+import { range } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { extend, useResource, useThree } from "react-three-fiber";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { extend, useFrame, useResource, useThree } from 'react-three-fiber';
 
-import { CameraControls, Spotlight } from "./ColorSpace";
-import getColorXYZPosition from "../utils/getColorXYZPosition";
-import { SPACES } from "../utils/constants";
+import { CameraControls, Spotlight } from './ColorSpace';
+import getColorXYZPosition from '../utils/getColorXYZPosition';
+import { SPACES } from '../utils/constants';
 
 extend({ OrbitControls });
 
-const startingCameraPosition = [0, 0, 125];
+const startingCameraPosition = [0, 0, 135];
 const startingFocalPoint = [0, 0, 0];
 
 function ColorSphere({ color, geometry, position }) {
@@ -38,19 +38,18 @@ ColorSphere.propTypes = {
 
 export default function UMAPColorSpace({
   animateToCoordinates,
-  autoRotate,
-  cameraPosition,
   data,
   dimensions,
   go,
-  orbitTarget,
   space,
   spaceRadius,
   sphereRadius,
 }) {
   const [geometryRef, geometry] = useResource();
+  const groupRef = useRef();
   const { camera } = useThree();
 
+  const [rotation, setRotation] = useSpring(() => ({ x: 1, y: 1, z: 0 }));
   const [positions, setPositions] = useSprings(data.length, i => {
     const { x, y, z } = getColorXYZPosition[space](spaceRadius, data[i]);
     return { meshPosition: [x, y, z] };
@@ -66,6 +65,7 @@ export default function UMAPColorSpace({
 
   useEffect(() => {
     if (animateToCoordinates && go) {
+      setRotation({ x: 0, y: 0, z: 0 });
       const coords = new Float32Array(animateToCoordinates);
       setPositions(i => {
         const j = i * dimensions;
@@ -84,25 +84,37 @@ export default function UMAPColorSpace({
   }, [animateToCoordinates, dimensions, go, scale, setPositions]);
 
   useEffect(() => {
-    camera.position.set(...(cameraPosition || startingCameraPosition));
+    camera.position.set(...startingCameraPosition);
     camera.lookAt(...startingFocalPoint);
-  }, [camera, cameraPosition]);
+  }, [camera, startingCameraPosition]);
+
+  useFrame(() => {
+    if (!go) {
+      groupRef.current.rotation.x = groupRef.current.rotation.y += 0.01;
+    }
+  });
 
   return (
     <group>
-      <CameraControls autoRotate={autoRotate} target={orbitTarget} />
+      <CameraControls autoRotate={false} />
       <Spotlight />
       <sphereBufferGeometry args={[sphereRadius, 25, 25]} ref={geometryRef} />
-      {data.map((d, i) => {
-        return (
-          <ColorSphere
-            color={d.color}
-            geometry={geometry}
-            key={`${i}-${d.color}`}
-            position={positions[i].meshPosition}
-          />
-        );
-      })}
+      <animated.group
+        ref={groupRef}
+        rotation-x={rotation.x}
+        rotation-y={rotation.y}
+      >
+        {data.map((d, i) => {
+          return (
+            <ColorSphere
+              color={d.color}
+              geometry={geometry}
+              key={`${i}-${d.color}`}
+              position={positions[i].meshPosition}
+            />
+          );
+        })}
+      </animated.group>
     </group>
   );
 }
@@ -116,7 +128,6 @@ UMAPColorSpace.defaultProps = {
 
 UMAPColorSpace.propTypes = {
   animateToCoordinates: PropTypes.instanceOf(ArrayBuffer),
-  autoRotate: PropTypes.bool.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({ color: PropTypes.string.isRequired })
   ).isRequired,
