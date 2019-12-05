@@ -13,6 +13,7 @@ import AnimateToUMAPColorSpace from "./components/AnimateToUMAPColorSpace"
 import AnimateToUMAPMNISTDigits from './components/LoadableAnimateToUMAPMNISTDigits'
 import ColorSpace from "./components/LoadableColorSpace"
 import Credit from "./components/Credit"
+import MNISTLegend from './components/MNISTLegend'
 import SingleMNISTDigit from './components/SingleMNISTDigit'
 import SphereVisitsFlatland, {
   startingCameraPosition,
@@ -182,7 +183,8 @@ const sphereVisitCamera = {
 
 ---
 
-<AbsoluteTitle>UMAP of 5000 MNIST digits</AbsoluteTitle>
+<MNISTLegend position='top right'/>
+<AbsoluteTitle>UMAP on 5000 MNIST digits</AbsoluteTitle>
 <AnimateToUMAPMNISTDigits/>
 
 ---
@@ -349,27 +351,30 @@ const sphereVisitCamera = {
 
 <Title>
   <h1>demo 1️⃣</h1>
-  <h2>umap-js via the main thread</h2>
-  <h2>n = 1000, iterations = true</h2>
-</Title>
-
----
-
-<AbsoluteTitle>UMAP in main</AbsoluteTitle>
-<UMAPonMNIST data={data1000} iterate worker={false} />
-
----
-
-<Title>
-  <h1>demo 2️⃣</h1>
   <h2>umap-js via a Worker</h2>
   <h2>n = 1000, iterations = true</h2>
 </Title>
 
 ---
 
+<MNISTLegend/>
 <AbsoluteTitle>UMAP in Worker, n = 1000</AbsoluteTitle>
 <UMAPonMNIST data={data1000} iterate />
+
+---
+
+<Title>
+  <h1>demo 2️⃣</h1>
+  <h2>umap-js via the main thread</h2>
+  <h2>n = 1000, iterations = true</h2>
+</Title>
+
+---
+
+<MNISTLegend/>
+<AbsoluteTitle>UMAP in main</AbsoluteTitle>
+<UMAPonMNIST data={data1000} iterate worker={false} />
+
 
 ---
 
@@ -381,6 +386,7 @@ const sphereVisitCamera = {
 
 ---
 
+<MNISTLegend/>
 <AbsoluteTitle>UMAP in Worker, n = 2500</AbsoluteTitle>
 <UMAPonMNIST data={data2500} iterate />
 
@@ -394,6 +400,7 @@ const sphereVisitCamera = {
 
 ---
 
+<MNISTLegend/>
 <AbsoluteTitle>UMAP in Worker, n = 5000</AbsoluteTitle>
 <UMAPonMNIST data={data5000} iterate />
 
@@ -478,6 +485,8 @@ const sphereVisitCamera = {
 
 ---
 
+<MNISTLegend/>
+
 <AbsoluteTitle>UMAP & render in Workers, n = 5000</AbsoluteTitle>
 <UMAPonMNISTOffscreen data={data5000} iterate />
 
@@ -507,4 +516,4 @@ const sphereVisitCamera = {
 - animations: react-spring and TweenJS
 - ...and a bit of
    + inline SVG
-   + regular Canvas API
+   + regular Canvas
