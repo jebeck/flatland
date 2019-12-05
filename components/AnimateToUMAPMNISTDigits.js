@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { extent } from 'd3-array';
+import { extent, range } from 'd3-array';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { Application, Text, TextStyle } from 'pixi.js';
@@ -8,9 +8,11 @@ import TWEEN from '@tweenjs/tween.js';
 import inputData from '../json/MNISTdigits5000.json';
 import umapData from '../json/MNISTdigits5000UMAP.json';
 
-const PADDING = 64;
+const PADDING = 100;
 
-const colorScale = scaleOrdinal(schemeCategory10);
+const colorScale = scaleOrdinal()
+  .domain(range(0, 10))
+  .range(schemeCategory10);
 const xScale = scaleLinear()
   .domain(extent(Object.values(umapData).filter((d, i) => i % 2 === 0)))
   .range([PADDING, window.innerWidth - PADDING]);

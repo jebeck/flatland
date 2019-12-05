@@ -1,4 +1,4 @@
-import { extent } from 'd3-array';
+import { extent, range } from 'd3-array';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { Application, Text, TextStyle } from 'pixi.js';
@@ -10,7 +10,9 @@ const textStyle = new TextStyle({
 
 const PADDING = 100;
 
-const colorScale = scaleOrdinal(schemeCategory10);
+const colorScale = scaleOrdinal()
+  .domain(range(0, 10))
+  .range(schemeCategory10);
 
 export default function renderUMAPonMNIST({ canvas, data, stats }) {
   const pixi = new Application({
