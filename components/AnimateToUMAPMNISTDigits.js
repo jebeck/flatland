@@ -67,10 +67,6 @@ export default function AnimateToUMAPMNISTDigits() {
   const [go, setGo] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setGo(true), 5000);
-  }, []);
-
-  useEffect(() => {
     if (go && rendered) {
       inputData.map((d, i) => {
         const origPosition = { ...startingPositions[i] };
@@ -78,7 +74,6 @@ export default function AnimateToUMAPMNISTDigits() {
           .to({ ...endingPositions[i] }, 1500)
           .easing(TWEEN.Easing.Quadratic.InOut)
           .onUpdate(() => {
-            // rendered[i].style.fill = interpolateColor(origPosition.color);
             rendered[i].x = origPosition.x;
             rendered[i].y = origPosition.y;
           })
@@ -95,7 +90,10 @@ export default function AnimateToUMAPMNISTDigits() {
 
   if (xScale.range()[1] !== 1) {
     return (
-      <div style={{ height: '100vh', width: '100vw' }}>
+      <div
+        onClick={() => setGo(true)}
+        style={{ height: '100vh', width: '100vw' }}
+      >
         <canvas
           height={window.innerHeight * window.devicePixelRatio}
           ref={canvasEl}
